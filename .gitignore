@@ -1,6 +1,7 @@
 # Ignore everything
 *
 
-# Except the landing page
-!naked_landing.html
+# Except the landing page and GitHub Pages config
+!index.html
+!CNAME
 !.gitignore

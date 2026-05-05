@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We're Naked! — ChefMyKLove</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --dust: #c4a882;
+  --cream: #f0e8d8;
+  --warm: #e8dcc8;
+  --dim: #8a7a6a;
+  --gold: #b8965a;
+  --ember: #c17a3a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--warm);
+  font-family: 'Crimson Text', serif;
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(196,168,130,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(193,122,58,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #1a1410 0%, #221810 50%, #1a1410 100%);
+}
+
+.hero-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.pre-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  letter-spacing: -1px;
+  color: var(--cream);
+  line-height: 0.95;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s forwards;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--dust);
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3em;
+  color: var(--dim);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 1s 0.6s forwards;
+}
+
+.byline {
+  font-size: 0.9em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 64px;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s forwards;
+}
+
+.edition-pills {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 1s forwards;
+}
+
+.pill {
+  padding: 10px 24px;
+  border: 1px solid rgba(196,168,130,0.3);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: transparent;
+}
+
+.pill:hover {
+  border-color: var(--gold);
+  color: var(--cream);
+  background: rgba(196,168,130,0.06);
+}
+
+.pill.gold {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.pill.gold:hover {
+  background: rgba(184,150,90,0.12);
+  color: var(--cream);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--dim);
+  font-size: 0.7em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s forwards;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--dim), transparent);
+  animation: scrollPulse 2s 2s infinite;
+}
+
+/* ── SECTION BASE ── */
+.section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 40px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+}
+
+.section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(196,168,130,0.15);
+}
+
+/* ── ORDINAL SECTION ── */
+.ordinal-section {
+  background: linear-gradient(135deg, rgba(193,122,58,0.04) 0%, transparent 60%);
+}
+
+.ordinal-header {
+  margin-bottom: 56px;
+}
+
+.ordinal-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 300;
+  color: rgba(184,150,90,0.15);
+  line-height: 1;
+  margin-bottom: -20px;
+  letter-spacing: -4px;
+}
+
+.ordinal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.ordinal-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.ordinal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-bottom: 56px;
+}
+
+.ordinal-description p {
+  color: var(--warm);
+  margin-bottom: 20px;
+  font-size: 1.05em;
+}
+
+.ordinal-description p:last-child { margin-bottom: 0; }
+
+.burn-mechanic {
+  border-left: 1px solid rgba(193,122,58,0.4);
+  padding-left: 32px;
+}
+
+.burn-mechanic h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 24px;
+}
+
+.burn-step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.burn-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75em;
+  color: var(--ember);
+  letter-spacing: 1px;
+  min-width: 24px;
+  padding-top: 2px;
+}
+
+.burn-text {
+  font-size: 0.9em;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.burn-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85em;
+  color: rgba(184,150,90,0.6);
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+}
+
+.chapbook-specs {
+  background: rgba(196,168,130,0.04);
+  border: 1px solid rgba(196,168,130,0.12);
+  padding: 32px;
+  margin-bottom: 48px;
+}
+
+.chapbook-specs h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 20px;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.spec-item {
+  border-left: 1px solid rgba(196,168,130,0.2);
+  padding-left: 16px;
+}
+
+.spec-label {
+  font-size: 0.65em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 4px;
+}
+
+.spec-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1em;
+  color: var(--cream);
+}
+
+.rarity-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--dust);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  padding: 32px;
+  border-top: 1px solid rgba(196,168,130,0.15);
+  border-bottom: 1px solid rgba(196,168,130,0.15);
+  text-align: center;
+}
+
+.cta-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 16px 40px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--cream);
+}
+
+.btn-secondary {
+  padding: 16px 40px;
+  border: 1px solid rgba(196,168,130,0.4);
+  color: var(--dust);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--cream);
+}
+
+/* ── STANDARD SECTION ── */
+.standard-section { }
+
+.standard-intro {
+  font-size: 1.1em;
+  color: var(--warm);
+  max-width: 560px;
+  margin-bottom: 48px;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.platform-item {
+  padding: 28px 32px;
+  background: rgba(196,168,130,0.03);
+  border: 1px solid rgba(196,168,130,0.08);
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  color: var(--warm);
+}
+
+.platform-item:hover {
+  background: rgba(196,168,130,0.07);
+  border-color: rgba(196,168,130,0.2);
+}
+
+.platform-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  color: var(--cream);
+}
+
+.platform-sub {
+  font-size: 0.75em;
+  color: var(--dim);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.platform-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1em;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.platform-arrow {
+  color: var(--dim);
+  font-size: 0.8em;
+  margin-left: 16px;
+  transition: transform 0.3s ease;
+}
+
+.platform-item:hover .platform-arrow {
+  transform: translateX(4px);
+  color: var(--gold);
+}
+
+/* ── ABOUT ── */
+.about-section { }
+
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-moniker {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(196,168,130,0.3);
+  line-height: 1.1;
+}
+
+.about-text p {
+  color: var(--warm);
+  margin-bottom: 20px;
+  font-size: 1.05em;
+}
+
+.next-work {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+}
+
+.next-label {
+  font-size: 0.7em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+
+.next-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.8em;
+  color: var(--dust);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(196,168,130,0.1);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-copy {
+  font-size: 0.75em;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+}
+
+.footer-links a {
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ── INTERSECTION OBSERVER REVEALS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .ordinal-body { grid-template-columns: 1fr; gap: 40px; }
+  .spec-grid { grid-template-columns: repeat(2, 1fr); }
+  .platform-grid { grid-template-columns: 1fr; }
+  .about-body { grid-template-columns: 1fr; gap: 32px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .section { padding: 80px 24px; }
+  .burn-mechanic { padding-left: 20px; }
+  .cta-row { flex-direction: column; }
+  .btn-primary, .btn-secondary { text-align: center; }
+}
+/* ── ONLINE EDITION ── */
+.online-section {
+  background: linear-gradient(135deg, rgba(138,122,106,0.06) 0%, transparent 60%);
+}
+
+.online-pride-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  padding: 14px 20px;
+  border: 1px solid rgba(196,168,130,0.18);
+  background: rgba(196,168,130,0.04);
+}
+
+.pride-flag {
+  display: flex;
+  height: 12px;
+  width: 48px;
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pride-flag span {
+  flex: 1;
+}
+
+.pride-text {
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.pride-text strong {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.online-header {
+  margin-bottom: 40px;
+}
+
+.online-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.online-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.online-description {
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+
+.online-description p {
+  color: var(--warm);
+  margin-bottom: 16px;
+  font-size: 1.05em;
+}
+
+.split-display {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.split-half {
+  flex: 1;
+  padding: 24px 28px;
+  background: rgba(196,168,130,0.03);
+  border: 1px solid rgba(196,168,130,0.1);
+}
+
+.split-pct {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  color: rgba(184,150,90,0.4);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.split-label {
+  font-size: 0.8em;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+.split-label strong {
+  display: block;
+  font-weight: 400;
+  color: var(--cream);
+  font-size: 1.05em;
+  margin-bottom: 2px;
+}
+
+/* ── STRIPE DONATION MODAL ── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,20,16,0.88);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-box {
+  background: #221c16;
+  border: 1px solid rgba(196,168,130,0.2);
+  padding: 48px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--dim);
+  font-size: 1.4em;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover { color: var(--cream); }
+
+.modal-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8em;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.modal-sub {
+  font-size: 0.85em;
+  color: var(--dim);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.modal-sub em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.amount-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.amount-btn {
+  padding: 10px 20px;
+  border: 1px solid rgba(196,168,130,0.25);
+  background: transparent;
+  color: var(--dust);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+
+.amount-btn:hover,
+.amount-btn.selected {
+  border-color: var(--gold);
+  color: var(--cream);
+  background: rgba(184,150,90,0.1);
+}
+
+.amount-custom-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(196,168,130,0.2);
+  margin-bottom: 28px;
+  background: transparent;
+}
+
+.amount-symbol {
+  padding: 0 14px;
+  color: var(--dim);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  border-right: 1px solid rgba(196,168,130,0.2);
+}
+
+.amount-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  outline: none;
+  width: 100%;
+}
+
+.amount-input::placeholder { color: var(--dim); }
+
+#stripe-card-element {
+  padding: 14px 16px;
+  border: 1px solid rgba(196,168,130,0.2);
+  margin-bottom: 20px;
+  background: rgba(196,168,130,0.03);
+}
+
+.modal-error {
+  color: #e07a5a;
+  font-size: 0.85em;
+  margin-bottom: 16px;
+  min-height: 20px;
+}
+
+.modal-note {
+  font-size: 0.72em;
+  color: var(--dim);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.modal-note a { color: var(--gold); text-decoration: none; }
+
+/* ── RESPONSIVE (additions) ── */
+@media (max-width: 768px) {
+  .split-display { flex-direction: column; }
+  .modal-box { padding: 32px 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="pre-title">ChefMyKLove &nbsp;·&nbsp; 2026</p>
+    <h1>We're<br><em>Naked!</em></h1>
+    <p class="subtitle">A Rapture in Three Acts</p>
+    <p class="byline">by ChefMyKLove</p>
+    <div class="edition-pills">
+      <a class="pill gold" href="#standard">Standard Edition — $2.99</a>
+      <a class="pill" href="#online">Online Edition — $5 Donation</a>
+      <a class="pill" href="#ordinal">The Ordinal Edition</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ── STANDARD EDITION ── -->
+<section id="standard" class="section standard-section">
+  <div class="section-label">Standard Edition</div>
+
+  <p class="standard-intro reveal">The story in ePub and MOBI — available everywhere books are sold.  $2.99.</p>
+
+  <div class="platform-grid reveal">
+    <a class="platform-item" href="https://amazon.com" target="_blank">
+      <div>
+        <div class="platform-name">Amazon Kindle</div>
+        <div class="platform-sub">Largest ebook audience worldwide</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+    <a class="platform-item" href="https://kobo.com" target="_blank">
+      <div>
+        <div class="platform-name">Kobo</div>
+        <div class="platform-sub">Canada's home platform</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+    <a class="platform-item" href="https://books.apple.com" target="_blank">
+      <div>
+        <div class="platform-name">Apple Books</div>
+        <div class="platform-sub">Premium reader audience</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+    <a class="platform-item" href="https://barnesandnoble.com" target="_blank">
+      <div>
+        <div class="platform-name">Barnes &amp; Noble</div>
+        <div class="platform-sub">via Draft2Digital</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+    <a class="platform-item" href="https://scribd.com" target="_blank">
+      <div>
+        <div class="platform-name">Scribd</div>
+        <div class="platform-sub">Subscription pool</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+    <a class="platform-item" href="https://draft2digital.com" target="_blank">
+      <div>
+        <div class="platform-name">+ All Others</div>
+        <div class="platform-sub">Tolino, Overdrive, and more via D2D</div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <span class="platform-price">$2.99</span>
+        <span class="platform-arrow">→</span>
+      </div>
+    </a>
+  </div>
+
+  <p style="font-size:0.8em;color:var(--dim);font-style:italic;">
+    ISBN 978-1-0673516-0-1 &nbsp;·&nbsp; First Edition, 2026 &nbsp;·&nbsp; Published by ChefMyKLove
+  </p>
+</section>
+
+<!-- ── ONLINE EDITION ── -->
+<section id="online" class="section online-section">
+  <div class="section-label">Special Online Edition</div>
+
+  <div class="online-pride-bar reveal">
+    <div class="pride-flag">
+      <span style="background:#e40303"></span>
+      <span style="background:#ff8c00"></span>
+      <span style="background:#ffed00"></span>
+      <span style="background:#008026"></span>
+      <span style="background:#004dff"></span>
+      <span style="background:#750787"></span>
+    </div>
+    <p class="pride-text"><strong>50% of every donation</strong> goes directly to the Nanaimo Pride Society</p>
+  </div>
+
+  <div class="online-header reveal">
+    <h2 class="online-title">The Full Story — Read It in Your Browser.</h2>
+    <p class="online-price">Pay what you want &nbsp;·&nbsp; $5 minimum donation &nbsp;·&nbsp; Instant access link</p>
+  </div>
+
+  <div class="online-description reveal">
+    <p>The interactive HTML edition of <em>We're Naked!</em> — the version with the dream-sequence animation intact, formatted for a screen, readable anywhere. Donate $5 or more and receive a private access link by email.</p>
+    <p>No subscription. No account. Just the story, in your browser, at your pace.</p>
+  </div>
+
+  <div class="split-display reveal">
+    <div class="split-half">
+      <div class="split-pct">50%</div>
+      <div class="split-label">
+        <strong>Nanaimo Pride Society</strong>
+        supporting 2SLGBTQ+ community on the island
+      </div>
+    </div>
+    <div class="split-half">
+      <div class="split-pct">50%</div>
+      <div class="split-label">
+        <strong>ChefMyKLove</strong>
+        the author, making more weird beautiful things
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-row reveal">
+    <button class="btn-primary" id="open-donation-modal">Donate &amp; Read — from $5</button>
+  </div>
+</section>
+
+<!-- ── ORDINAL EDITION ── -->
+<section id="ordinal" class="section ordinal-section">
+  <div class="section-label">The Ordinal Edition <span style="color:var(--ember)">●</span></div>
+
+  <div class="ordinal-header reveal">
+    <div class="ordinal-number">100</div>
+    <h2 class="ordinal-title">Inscribed on Bitcoin.<br>Redeemable for the hand-bound chapbook.</h2>
+    <p class="ordinal-price">~$100 USD &nbsp;·&nbsp; 100 inscriptions &nbsp;·&nbsp; Never reprinted</p>
+  </div>
+
+  <div class="ordinal-body reveal">
+    <div class="ordinal-description">
+      <p>Each of the 100 Ordinal inscriptions contains the complete story — the full text, the cover art, and the interactive animation that plays during the dream sequence. Inscribed permanently on BSV Blockchain. Not a file on a server somewhere. The story itself, on-chain, forever.</p>
+      <p>Hold it as a digital artefact. Or burn it.</p>
+      <p>Burning your Ordinal is an irreversible act that retires the digital inscription from existence and triggers fulfilment of a hand-bound physical chapbook — numbered to match, shipped to you personally by the author.</p>
+      <p>How many chapbooks will exist? That depends entirely on how many holders choose to burn. It could be one. It could be all one hundred. The uncertainty is the point to this exercise in collectible rarities.</p>
+    </div>
+
+    <div class="burn-mechanic">
+      <h3>The Burn &rarr; Redeem Mechanic</h3>
+      <div class="burn-step">
+        <span class="burn-num">01</span>
+        <span class="burn-text">Mint your Ordinal inscription on 3Dordi or buy one through chefmyklove.com/we're_naked/ordinals</span>
+      </div>
+      <div class="burn-step">
+        <span class="burn-num">02</span>
+        <span class="burn-text">When ready to redeem, sign in with your wallet at chefmyklove.com/redeem to begin the process. The burn is permanent and public.</span>
+      </div>
+      <div class="burn-step">
+        <span class="burn-num">03</span>
+        <span class="burn-text">Ensure your burn transaction hash and shipping address are correct at chefmyklove.com/redeem</span>
+      </div>
+      <div class="burn-step">
+        <span class="burn-num">04</span>
+        <span class="burn-text">The author verifies on-chain, hand-binds your copy and ships the physical chapbook to your provided address.</span>
+      </div>
+      <div class="burn-step">
+        <span class="burn-num">05</span>
+        <span class="burn-text">Your chapbook arrives numbered to match the Ordinal it replaced — with a QR code linking to its on-chain provenance forever</span>
+      </div>
+      <p class="burn-note">Once burned, that numbered digital inscription is gone. The chapbook and another unique collectible (think bonus stuff - like a copy of the OG draft of the story) are what remains.</p>
+    </div>
+  </div>
+
+  <div class="chapbook-specs reveal">
+    <h3>The Physical Chapbook</h3>
+    <div class="spec-grid">
+      <div class="spec-item">
+        <div class="spec-label">Binding</div>
+        <div class="spec-value">Hand-bound, Coptic stitch</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Cover</div>
+        <div class="spec-value">Heavy card stock, full bleed art</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Interior</div>
+        <div class="spec-value">Cream paper, Garamond body</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Signature</div>
+        <div class="spec-value">Hand-signed by ChefMyKLove</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Edition</div>
+        <div class="spec-value">Numbered — #X of 100 max</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Provenance</div>
+        <div class="spec-value">QR → Bitcoin inscription</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="rarity-statement reveal">
+    "One of the rarest books out there — because it can only exist<br>if someone chooses to end its digital life to begin its physical one."
+  </p>
+
+  <div class="cta-row reveal">
+    <a class="btn-primary" href="https://chefmyklove.com" target="_blank">5BSV</a>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="section about-section">
+  <div class="section-label">About the Author</div>
+
+  <div class="about-body">
+    <div class="about-moniker reveal">Chef<br>My<br>K<br>Love</div>
+    <div class="about-text reveal">
+      <p>ChefMyKLove is an artist, writer, soap maker, blockchain developer, and former chef based on Vancouver Island, British Columbia. </p>
+      <p><em>We're Naked! A Rapture in Three Acts</em> is their debut published fiction. It started as a dream, became a conversation, and ended up on Bitcoin.</p>
+      <div class="next-work">
+        <div class="next-label">Also Available from ChefMyKLove</div>
+        <div class="next-title">So in it for the In Love -- Love Poems and Other Musings</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DONATION MODAL ── -->
+<div class="modal-backdrop" id="donation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+  <div class="modal-box">
+    <button class="modal-close" id="close-modal" aria-label="Close">&times;</button>
+    <p class="modal-label">Special Online Edition</p>
+    <h2 class="modal-title" id="modal-heading">Donate &amp; Read</h2>
+    <p class="modal-sub">Minimum $5. <em>Half goes to Nanaimo Pride Society.</em> You'll receive an access link by email immediately after payment.</p>
+
+    <div class="amount-row" id="amount-row">
+      <button class="amount-btn selected" data-amount="5">$5</button>
+      <button class="amount-btn" data-amount="10">$10</button>
+      <button class="amount-btn" data-amount="20">$20</button>
+      <button class="amount-btn" data-amount="50">$50</button>
+    </div>
+
+    <div class="amount-custom-wrap">
+      <span class="amount-symbol">$</span>
+      <input class="amount-input" id="custom-amount" type="number" min="5" step="1" placeholder="Custom amount" aria-label="Custom donation amount">
+    </div>
+
+    <label style="font-size:0.75em;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:12px;">Email for access link</label>
+    <div class="amount-custom-wrap" style="margin-bottom:20px;">
+      <span class="amount-symbol" style="font-size:0.9em;">@</span>
+      <input class="amount-input" id="donor-email" type="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address">
+    </div>
+
+    <div id="stripe-card-element"><!-- Stripe mounts here --></div>
+
+    <p class="modal-error" id="modal-error" aria-live="polite"></p>
+
+    <button class="btn-primary" id="submit-donation" style="width:100%;text-align:center;" disabled>Loading&hellip;</button>
+
+    <p class="modal-note">
+      Payments processed securely by <a href="https://stripe.com" target="_blank" rel="noopener">Stripe</a>.
+      Your card details never touch our server.
+      By donating you agree to receive a one-time access-link email.
+    </p>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 ChefMyKLove &nbsp;·&nbsp; All rights reserved</p>
+    <div class="footer-links">
+      <a href="https://chefmyklove.com">Home</a>
+      <a href="https://ordinalrainbows.com">Ordinal Rainbows</a>
+      <a href="/redeem">Redeem</a>
+      <a href="mailto:hello@chefmyklove.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+// ── Intersection Observer for reveals ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// ── Donation modal & Stripe ──
+// IMPORTANT: Replace YOUR_STRIPE_PUBLISHABLE_KEY with your actual pk_live_... key
+// and point PAYMENT_ENDPOINT to your backend that creates a PaymentIntent.
+const STRIPE_PK = 'pk_test_REPLACE_WITH_YOUR_PUBLISHABLE_KEY';
+const PAYMENT_ENDPOINT = '/api/donate'; // your server endpoint
+
+let stripe, cardElement, selectedAmount = 5;
+
+const modal       = document.getElementById('donation-modal');
+const openBtn     = document.getElementById('open-donation-modal');
+const closeBtn    = document.getElementById('close-modal');
+const submitBtn   = document.getElementById('submit-donation');
+const errorEl     = document.getElementById('modal-error');
+const customInput = document.getElementById('custom-amount');
+const emailInput  = document.getElementById('donor-email');
+const amountRow   = document.getElementById('amount-row');
+
+// Open / close
+function openModal() {
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (!stripe) initStripe();
+}
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  errorEl.textContent = '';
+}
+
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// Amount buttons
+amountRow.querySelectorAll('.amount-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    amountRow.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedAmount = parseInt(btn.dataset.amount, 10);
+    customInput.value = '';
+    updateSubmitLabel();
+  });
+});
+
+customInput.addEventListener('input', () => {
+  amountRow.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  const val = parseFloat(customInput.value);
+  selectedAmount = (!isNaN(val) && val >= 5) ? val : null;
+  updateSubmitLabel();
+});
+
+function updateSubmitLabel() {
+  if (selectedAmount) {
+    submitBtn.textContent = `Donate $${selectedAmount} & Read`;
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.textContent = 'Minimum $5';
+    submitBtn.disabled = true;
+  }
+}
+
+// Init Stripe Elements
+function initStripe() {
+  stripe = Stripe(STRIPE_PK);
+  const elements = stripe.elements({
+    fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap' }]
+  });
+  cardElement = elements.create('card', {
+    style: {
+      base: {
+        color: '#e8dcc8',
+        fontFamily: '"Crimson Text", serif',
+        fontSize: '17px',
+        '::placeholder': { color: '#8a7a6a' },
+        iconColor: '#b8965a'
+      },
+      invalid: { color: '#e07a5a' }
+    }
+  });
+  cardElement.mount('#stripe-card-element');
+  cardElement.on('ready', () => {
+    submitBtn.textContent = 'Donate $5 & Read';
+    submitBtn.disabled = false;
+  });
+}
+
+// Submit payment
+submitBtn.addEventListener('click', async () => {
+  errorEl.textContent = '';
+  const email = emailInput.value.trim();
+
+  // Client-side validation
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    errorEl.textContent = 'Please enter a valid email address.';
+    return;
+  }
+  const amount = customInput.value ? parseFloat(customInput.value) : selectedAmount;
+  if (!amount || amount < 5) {
+    errorEl.textContent = 'Minimum donation is $5.';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Processing…';
+
+  try {
+    // 1. Ask your server to create a PaymentIntent
+    const res = await fetch(PAYMENT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: Math.round(amount * 100), email, currency: 'cad' })
+    });
+    if (!res.ok) throw new Error('Server error — please try again.');
+    const { clientSecret } = await res.json();
+
+    // 2. Confirm payment with Stripe
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement,
+        billing_details: { email }
+      },
+      receipt_email: email
+    });
+
+    if (error) {
+      errorEl.textContent = error.message;
+      submitBtn.disabled = false;
+      submitBtn.textContent = `Donate $${amount} & Read`;
+    } else if (paymentIntent.status === 'succeeded') {
+      // 3. On success — show thank-you and email is sent by server
+      document.querySelector('.modal-box').innerHTML = `
+        <p class="modal-label" style="margin-bottom:24px;">Payment confirmed</p>
+        <h2 class="modal-title" style="margin-bottom:16px;">Thank you.</h2>
+        <p style="color:var(--warm);line-height:1.7;margin-bottom:24px;">
+          Your access link is on its way to <strong style="color:var(--cream);">${email}</strong>.
+          Check your inbox (and spam folder, just in case).
+        </p>
+        <p style="font-size:0.8em;color:var(--dim);">Half of your donation is going to Nanaimo Pride Society. Thank you for that.</p>
+      `;
+    }
+  } catch (err) {
+    errorEl.textContent = err.message || 'Something went wrong — please try again.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = `Donate $${amount} & Read`;
+  }
+});
+</script>
+</body>
+</html>
