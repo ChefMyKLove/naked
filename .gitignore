@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Except the landing page
+!naked_landing.html
+!.gitignore
