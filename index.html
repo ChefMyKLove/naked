@@ -1303,12 +1303,40 @@ footer {
 </footer>
 
 <script>
-// ── Dust motes ──
+// ── Dust motes (curl-noise — same engine as the story) ──
 (function() {
   const canvas = document.getElementById('dust-bg');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, motes = [];
+  let W, H, particles = [], clock = 0;
+
+  // Simplex 2D noise
+  const simplex = (function() {
+    const F2 = 0.5*(Math.sqrt(3)-1), G2 = (3-Math.sqrt(3))/6;
+    const grad = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
+    const p = Array.from({length:256},(_,i)=>i).sort(()=>Math.random()-0.5);
+    const pm = new Array(512).fill(0).map((_,i)=>p[i&255]);
+    function dot(g,x,y){return g[0]*x+g[1]*y;}
+    return function(xin,yin){
+      const s=(xin+yin)*F2, i=Math.floor(xin+s), j=Math.floor(yin+s);
+      const t=(i+j)*G2, x0=xin-(i-t), y0=yin-(j-t);
+      const i1=x0>y0?1:0, j1=1-i1;
+      const x1=x0-i1+G2, y1=y0-j1+G2, x2=x0-1+2*G2, y2=y0-1+2*G2;
+      const ii=i&255, jj=j&255;
+      let n0=0,n1=0,n2=0;
+      let t0=0.5-x0*x0-y0*y0; if(t0>=0){t0*=t0;n0=t0*t0*dot(grad[pm[ii+pm[jj]]%8],x0,y0);}
+      let t1=0.5-x1*x1-y1*y1; if(t1>=0){t1*=t1;n1=t1*t1*dot(grad[pm[ii+i1+pm[jj+j1]]%8],x1,y1);}
+      let t2=0.5-x2*x2-y2*y2; if(t2>=0){t2*=t2;n2=t2*t2*dot(grad[pm[ii+1+pm[jj+1]]%8],x2,y2);}
+      return 70*(n0+n1+n2);
+    };
+  })();
+
+  function curlNoise(x, y) {
+    const sc = 0.0018, eps = 1.5;
+    const dy = (simplex(x*sc, (y+eps)*sc) - simplex(x*sc, (y-eps)*sc)) / (2*eps);
+    const dx = (simplex((x+eps)*sc, y*sc) - simplex((x-eps)*sc, y*sc)) / (2*eps);
+    return { x: dy, y: -dx };
+  }
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -1317,50 +1345,67 @@ footer {
 
   function makeMote(init) {
     const m = {};
-    function reset(fromBottom) {
-      m.x = Math.random() * W;
-      m.y = fromBottom ? H + 5 : Math.random() * H;
-      m.r       = 0.3 + Math.random() * 0.85;
-      m.vx      = (Math.random() - 0.5) * 0.12;
-      m.vy      = -(0.03 + Math.random() * 0.13);
-      m.maxA    = 0.04 + Math.random() * 0.11;
-      m.a       = fromBottom ? 0 : Math.random() * m.maxA;
-      m.sin     = Math.random() * Math.PI * 2;
-      m.sinAmp  = 0.15 + Math.random() * 0.45;
-      m.sinFreq = 0.005 + Math.random() * 0.009;
-      m.warm    = Math.random();
+    function reset() {
+      m.x    = Math.random() * W;
+      m.y    = init ? Math.random() * H : H + 5;
+      m.vx   = (Math.random()-0.5) * 0.9;
+      m.vy   = (Math.random()-0.5) * 0.9 * 0.6;
+      m.size = 0.4 + Math.random() * 0.7;
+      m.life = init ? Math.random() : 1.0;
+      m.decay= 0.00025 + Math.random() * 0.0005;
+      m.warm = Math.random();
     }
-    reset(!init);
+    reset();
     m.update = function() {
-      m.sin += m.sinFreq;
-      m.x += m.vx + Math.sin(m.sin) * m.sinAmp * 0.02;
-      m.y += m.vy;
-      if (m.a < m.maxA) m.a = Math.min(m.a + 0.0008, m.maxA);
-      if (m.y < -4) reset(true);
+      const curl = curlNoise(m.x + clock * 0.20, m.y + clock * 0.15);
+      m.vx += curl.x * 1.05;
+      m.vy += curl.y * 1.05;
+      m.vx += (Math.random()-0.5) * 0.10;
+      m.vy += (Math.random()-0.5) * 0.08;
+      const spd = Math.sqrt(m.vx*m.vx + m.vy*m.vy);
+      if (spd > 3.5) { m.vx *= 3.5/spd; m.vy *= 3.5/spd; }
+      m.vx *= 0.982; m.vy *= 0.982;
+      m.x += m.vx; m.y += m.vy;
+      m.life -= m.decay;
+      const pad = 40;
+      if (m.x > W+pad) m.x = -pad;
+      if (m.x < -pad)  m.x = W+pad;
+      if (m.y > H+pad) m.y = -pad;
+      if (m.y < -pad)  m.y = H+pad;
+      if (m.life <= 0) { reset(); m.life = 1.0; }
     };
     m.draw = function() {
-      if (m.a < 0.004) return;
-      const r = Math.round(195 + m.warm * 35);
-      const g = Math.round(168 + m.warm * 22);
-      const b = Math.round(128 + m.warm * 15);
-      ctx.globalAlpha = m.a;
+      const a = m.life * 0.18;
+      if (a < 0.005) return;
+      const r = Math.round(195 + m.warm*35);
+      const g = Math.round(168 + m.warm*22);
+      const b = Math.round(128 + m.warm*12);
+      const spd = Math.sqrt(m.vx*m.vx + m.vy*m.vy);
+      const len = m.size + spd * 1.8;
+      const ang = Math.atan2(m.vy, m.vx);
+      ctx.save();
+      ctx.translate(m.x, m.y);
+      ctx.rotate(ang);
+      ctx.globalAlpha = a;
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.beginPath();
-      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, len, m.size * 0.55, 0, 0, Math.PI*2);
       ctx.fill();
+      ctx.restore();
     };
     return m;
   }
 
   function loop() {
     ctx.clearRect(0, 0, W, H);
-    motes.forEach(m => { m.update(); m.draw(); });
+    clock++;
+    particles.forEach(m => { m.update(); m.draw(); });
     ctx.globalAlpha = 1;
     requestAnimationFrame(loop);
   }
 
   resize();
-  for (let i = 0; i < 65; i++) motes.push(makeMote(true));
+  for (let i = 0; i < 70; i++) particles.push(makeMote(true));
   window.addEventListener('resize', resize);
   loop();
 })();
