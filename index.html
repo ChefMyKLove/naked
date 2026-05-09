@@ -883,7 +883,7 @@ footer {
   <p class="standard-intro reveal">The story in ePub and MOBI — available everywhere books are sold.  $2.99.</p>
 
   <div class="cta-row reveal" style="margin-bottom:48px;">
-    <a class="btn-primary" href="http://naked.chefmyklove.com" target="_blank" rel="noopener">Pre-order Now</a>
+    <a class="btn-primary" href="https://books2read.com/u/4Aq8Xd" target="_blank" rel="noopener">Pre-order Now</a>
     <a class="btn-secondary" href="https://books2read.com/u/4Aq8Xd" target="_blank" rel="noopener">Find Your Store</a>
   </div>
 
@@ -891,7 +891,6 @@ footer {
     <a class="platform-item" href="https://books2read.com/u/4Aq8Xd" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Amazon Kindle</div>
-        <div class="platform-sub">Largest ebook audience worldwide</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -901,7 +900,6 @@ footer {
     <a class="platform-item" href="https://www.kobo.com/ca/en/ebook/we-re-naked-a-rapture-in-three-acts" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Kobo</div>
-        <div class="platform-sub">Canada's home platform</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -911,7 +909,6 @@ footer {
     <a class="platform-item" href="https://books2read.com/u/4Aq8Xd" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Apple Books</div>
-        <div class="platform-sub">Premium reader audience</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -921,7 +918,6 @@ footer {
     <a class="platform-item" href="https://books2read.com/u/4Aq8Xd" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Barnes &amp; Noble</div>
-        <div class="platform-sub">via Draft2Digital</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -931,7 +927,6 @@ footer {
     <a class="platform-item" href="https://fable.co/book/x-9781067351601" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Fable</div>
-        <div class="platform-sub">Social reading platform</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -941,7 +936,6 @@ footer {
     <a class="platform-item" href="https://shop.vivlio.com/product/9781067351601_9781067351601_10020/were-naked-a-rapture-in-three-acts" target="_blank" rel="noopener">
       <div>
         <div class="platform-name">Vivlio</div>
-        <div class="platform-sub">France &amp; European markets</div>
       </div>
       <div style="display:flex;align-items:center">
         <span class="platform-price">$2.99</span>
@@ -1099,6 +1093,10 @@ footer {
         <div class="next-label">Also Available from ChefMyKLove</div>
         <div class="next-title">So in it for the In Love -- Love Poems and Other Musings</div>
       </div>
+      <div class="next-work">
+        <div class="next-label">Coming Soon from ChefMyKLove</div>
+        <div class="next-title">Spectral Quest: Rainbow Craft</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1173,8 +1171,8 @@ reveals.forEach(el => observer.observe(el));
 // ── Donation modal & Stripe ──
 // IMPORTANT: Replace YOUR_STRIPE_PUBLISHABLE_KEY with your actual pk_live_... key
 // and point PAYMENT_ENDPOINT to your backend that creates a PaymentIntent.
-const STRIPE_PK = 'pk_test_REPLACE_WITH_YOUR_PUBLISHABLE_KEY';
-const PAYMENT_ENDPOINT = '/api/donate'; // your server endpoint
+const STRIPE_PK = 'pk_live_51TTU9mAoPd2thQRkgraEgG3fq6I2kBdMawxE6Iqs10wGa5G8fnjvnwqAEAf6cWIyJ9jfVUrH2dTHAGz2mfc7vTYk00kjSOhAXr';
+const PAYMENT_ENDPOINT = 'https://naked-production.up.railway.app/api/donate';
 
 let stripe, cardElement, selectedAmount = 5;
 
