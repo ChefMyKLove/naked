@@ -863,7 +863,7 @@ footer {
   inset: 0;
   width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 500;
 }
 
 /* ── QUOTES CAROUSEL ── */
@@ -948,6 +948,214 @@ footer {
 
 @media (max-width: 768px) {
   .quotes-section { padding: 70px 24px; }
+}
+
+/* ── REACTIONS CAROUSEL ── */
+.reactions-section {
+  padding: 100px 40px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.reactions-inner { max-width: 700px; margin: 0 auto; }
+
+.reactions-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 56px;
+}
+
+.reaction-track {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.reaction-slide {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  border: none;
+  margin: 0;
+}
+
+.reaction-slide.active { opacity: 1; }
+
+.reaction-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--dust);
+  line-height: 1.85;
+  max-width: 560px;
+  margin-bottom: 28px;
+}
+
+.reaction-text::before {
+  content: '\201C';
+  font-size: 1.4em;
+  color: rgba(184,150,90,0.25);
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin-right: 4px;
+}
+
+.reaction-text::after {
+  content: '\201D';
+  font-size: 1.4em;
+  color: rgba(184,150,90,0.25);
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin-left: 4px;
+}
+
+.reaction-attribution {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.reaction-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.reaction-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(138,122,106,0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.reaction-dot.active {
+  background: var(--gold);
+  transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+  .reactions-section { padding: 70px 24px; }
+}
+
+/* ── EXPLORE CAROUSEL ── */
+.explore-section {
+  padding: 100px 40px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.explore-inner { max-width: 600px; margin: 0 auto; }
+
+.explore-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 56px;
+}
+
+.explore-track {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.explore-card {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px 40px;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  border: 1px solid rgba(196,168,130,0.12);
+  background: rgba(196,168,130,0.025);
+}
+
+.explore-card.active { opacity: 1; }
+
+.explore-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8em;
+  color: rgba(184,150,90,0.22);
+  line-height: 1;
+  margin-bottom: 28px;
+  display: block;
+  letter-spacing: -2px;
+}
+
+.explore-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.explore-desc {
+  font-family: 'Crimson Text', serif;
+  font-size: 1em;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 400px;
+  margin-bottom: 36px;
+}
+
+.explore-soon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(184,150,90,0.5);
+  border: 1px solid rgba(184,150,90,0.2);
+  padding: 8px 20px;
+  display: inline-block;
+}
+
+.explore-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.explore-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(138,122,106,0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.explore-dot.active {
+  background: var(--gold);
+  transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+  .explore-section { padding: 70px 24px; }
+  .explore-card { padding: 40px 24px; }
 }
 
 </style>
@@ -1097,6 +1305,42 @@ footer {
   </p>
 </section>
 
+<!-- ── WHAT PEOPLE ARE SAYING ── -->
+<section class="reactions-section">
+  <div class="reactions-inner reveal">
+    <p class="reactions-eyebrow">What People Are Saying</p>
+    <div class="reaction-track" id="reaction-track">
+
+      <blockquote class="reaction-slide active">
+        <p class="reaction-text">Weaving poetry and introspection in a slice-of-life setting.</p>
+        <cite class="reaction-attribution">Soma Love</cite>
+      </blockquote>
+
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">&hellip;an original approach to the apocalypse, and a good read. &nbsp; I liked it.</p>
+        <cite class="reaction-attribution">John S. Hall</cite>
+      </blockquote>
+
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">I&rsquo;ve thought about the ending every day since I read it. That&rsquo;s not something I say about very many things.</p>
+        <cite class="reaction-attribution">Early Reader</cite>
+      </blockquote>
+
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">It&rsquo;s rare to read something that feels this intimate. Like you weren&rsquo;t supposed to be there — but you&rsquo;re so glad you were.</p>
+        <cite class="reaction-attribution">Advance Reader</cite>
+      </blockquote>
+
+    </div>
+    <div class="reaction-dots" id="reaction-dots">
+      <button class="reaction-dot active" data-index="0" aria-label="Response 1"></button>
+      <button class="reaction-dot" data-index="1" aria-label="Response 2"></button>
+      <button class="reaction-dot" data-index="2" aria-label="Response 3"></button>
+      <button class="reaction-dot" data-index="3" aria-label="Response 4"></button>
+    </div>
+  </div>
+</section>
+
 <!-- ── ONLINE EDITION ── -->
 <section id="online" class="section online-section">
   <div class="section-label">Special Online Edition</div>
@@ -1142,6 +1386,42 @@ footer {
 
   <div class="cta-row reveal">
     <button class="btn-primary" id="open-donation-modal">Donate &amp; Read — from $5</button>
+  </div>
+</section>
+
+<!-- ── EXPLORE THE ECOSYSTEM ── -->
+<section class="explore-section">
+  <div class="explore-inner reveal">
+    <p class="explore-eyebrow">Beyond the Page</p>
+    <div class="explore-track" id="explore-track">
+
+      <div class="explore-card active">
+        <span class="explore-icon">✦</span>
+        <h3 class="explore-title">Merchandise</h3>
+        <p class="explore-desc">Wear the work. Apparel, prints, and objects from the We&rsquo;re Naked universe.</p>
+        <a class="pill gold" href="#" target="_blank" rel="noopener">Shop the Collection &rarr;</a>
+      </div>
+
+      <div class="explore-card">
+        <span class="explore-icon">&#9654;</span>
+        <h3 class="explore-title">The Soundtrack</h3>
+        <p class="explore-desc">The playlist that scored the writing of We&rsquo;re Naked &mdash; curated for the mood of each act.</p>
+        <a class="pill gold" href="#" target="_blank" rel="noopener">Stream on Spotify &rarr;</a>
+      </div>
+
+      <div class="explore-card">
+        <span class="explore-icon">&#9834;</span>
+        <h3 class="explore-title">Original Music</h3>
+        <p class="explore-desc">Compositions written alongside the story. Scored for the spaces between the words.</p>
+        <span class="explore-soon">Coming Soon</span>
+      </div>
+
+    </div>
+    <div class="explore-dots" id="explore-dots">
+      <button class="explore-dot active" data-index="0" aria-label="Merchandise"></button>
+      <button class="explore-dot" data-index="1" aria-label="Soundtrack"></button>
+      <button class="explore-dot" data-index="2" aria-label="Original Music"></button>
+    </div>
   </div>
 </section>
 
@@ -1308,7 +1588,7 @@ footer {
   const canvas = document.getElementById('dust-bg');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, particles = [], masses = [], clock = 0;
+  let W, H, particles = [], clock = 0;
 
   // Simplex 2D noise
   const simplex = (function() {
@@ -1343,65 +1623,6 @@ footer {
     H = canvas.height = window.innerHeight;
   }
 
-  // ── Cloud masses (soft ambient hazes) ──
-  function makeMass() {
-    const m = {
-      cx: Math.random() * W,
-      cy: Math.random() * H,
-      vx: (Math.random()-0.5) * 1.2,
-      vy: (Math.random()-0.5) * 0.8,
-      puffs: []
-    };
-    const count = 5 + Math.floor(Math.random()*4);
-    for (let i = 0; i < count; i++) {
-      m.puffs.push({
-        ox: (Math.random()-0.5)*140, oy: (Math.random()-0.5)*80,
-        r: 140 + Math.random()*200,
-        alpha: 0.028 + Math.random()*0.038,
-        angle: Math.random()*Math.PI*2,
-        speed: (Math.random()<0.5?1:-1)*(0.014+Math.random()*0.018),
-        orbit: (20+Math.random()*55)*1.3,
-        orbitY: 0.4+Math.random()*0.4,
-        warm: Math.random()
-      });
-    }
-    m.update = function() {
-      const cn = curlNoise(m.cx + clock*0.4, m.cy + clock*0.25);
-      m.vx += cn.x*1.1; m.vy += cn.y*0.85;
-      m.vx *= 0.993; m.vy *= 0.993;
-      const spd = Math.sqrt(m.vx*m.vx+m.vy*m.vy);
-      if (spd > 2.6) { m.vx *= 2.6/spd; m.vy *= 2.6/spd; }
-      m.cx += m.vx; m.cy += m.vy;
-      const pad = 280;
-      if (m.cx > W+pad) m.cx = -pad;
-      if (m.cx < -pad)  m.cx = W+pad;
-      if (m.cy > H+pad) m.cy = -pad;
-      if (m.cy < -pad)  m.cy = H+pad;
-      m.puffs.forEach(p => { p.angle += p.speed; });
-    };
-    m.draw = function() {
-      m.puffs.forEach(p => {
-        const px = m.cx + p.ox + Math.cos(p.angle)*p.orbit;
-        const py = m.cy + p.oy + Math.sin(p.angle)*p.orbit*p.orbitY;
-        const r  = Math.round(195+p.warm*35);
-        const g  = Math.round(170+p.warm*22);
-        const b  = Math.round(130+p.warm*10);
-        const sn = Math.sin(p.angle*1.7+p.warm*Math.PI*2);
-        const pulse = 0.70 + 0.30*(sn>0?Math.pow(sn,0.35):-Math.pow(-sn,2.2));
-        const a = p.alpha * pulse;
-        const grad = ctx.createRadialGradient(px,py,0,px,py,p.r);
-        grad.addColorStop(0,   `rgba(${r},${g},${b},${a})`);
-        grad.addColorStop(0.5, `rgba(${r},${g},${b},${(a*0.4).toFixed(4)})`);
-        grad.addColorStop(1,   `rgba(${r},${g},${b},0)`);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(px, py, p.r, 0, Math.PI*2);
-        ctx.fill();
-      });
-    };
-    return m;
-  }
-
   // ── Fine particles ──
   function makeMote(init) {
     const m = {};
@@ -1410,7 +1631,7 @@ footer {
       m.y    = init ? Math.random() * H : H + 5;
       m.vx   = (Math.random()-0.5) * 0.9;
       m.vy   = (Math.random()-0.5) * 0.9 * 0.6;
-      m.size = 0.4 + Math.random() * 1.0;
+      m.size = 0.23 + Math.random() * 0.575;
       m.life = init ? Math.random() : 1.0;
       m.decay= 0.00022 + Math.random()*0.00045;
       m.warm = Math.random();
@@ -1435,7 +1656,7 @@ footer {
       if (m.life <= 0) { reset(); m.life = 1.0; }
     };
     m.draw = function() {
-      const a = m.life * 0.72;
+      const a = m.life * 0.95;
       if (a < 0.01) return;
       const r = Math.round(195+m.warm*35);
       const g = Math.round(168+m.warm*22);
@@ -1460,17 +1681,69 @@ footer {
     ctx.clearRect(0, 0, W, H);
     clock++;
     ctx.globalAlpha = 1;
-    masses.forEach(m => { m.update(); m.draw(); });
     particles.forEach(m => { m.update(); m.draw(); });
     ctx.globalAlpha = 1;
     requestAnimationFrame(loop);
   }
 
   resize();
-  for (let i = 0; i < 5; i++) masses.push(makeMass());
-  for (let i = 0; i < 160; i++) particles.push(makeMote(true));
+  for (let i = 0; i < 240; i++) particles.push(makeMote(true));
   window.addEventListener('resize', resize);
   loop();
+})();
+
+// ── Explore carousel ──
+(function() {
+  const cards = Array.from(document.querySelectorAll('#explore-track .explore-card'));
+  const dots  = Array.from(document.querySelectorAll('#explore-dots .explore-dot'));
+  let current = 0, timer;
+
+  function goTo(i) {
+    cards[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = ((i % cards.length) + cards.length) % cards.length;
+    cards[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 8000);
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    goTo(parseInt(d.dataset.index, 10));
+    start();
+  }));
+
+  start();
+})();
+
+// ── Reactions carousel ──
+(function() {
+  const slides = Array.from(document.querySelectorAll('#reaction-track .reaction-slide'));
+  const dots   = Array.from(document.querySelectorAll('#reaction-dots .reaction-dot'));
+  let current  = 0, timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = ((i % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 7000);
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    goTo(parseInt(d.dataset.index, 10));
+    start();
+  }));
+
+  start();
 })();
 
 // ── Quote carousel ──
