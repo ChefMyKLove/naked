@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We're Naked! — Complete Launch Battle Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #080810;
+  --ash: #f0ede8;
+  --ember: #c94f2a;
+  --gold: #c9963a;
+  --mist: #7a8a9a;
+  --smoke: #1c1c28;
+  --rose: #b05060;
+  --pale: #f7f4ef;
+  --glow: rgba(201,79,42,0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--ash);
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  cursor: default;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(201,79,42,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 80% 20%, rgba(176,80,96,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40% at 50% 50%, rgba(201,150,58,0.05) 0%, transparent 70%);
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 32px;
+  position: relative;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1.0;
+  position: relative;
+  animation: fadeUp 0.8s 0.15s ease both;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.hero-title .naked { color: var(--ash); }
+.hero-title .exclaim { color: var(--ember); }
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--mist);
+  margin-bottom: 48px;
+  position: relative;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+.hero-author {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 56px;
+  position: relative;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+.launch-card {
+  border: 1px solid var(--ember);
+  padding: 24px 48px;
+  position: relative;
+  animation: fadeUp 0.8s 0.6s ease both;
+  background: rgba(201,79,42,0.06);
+}
+.launch-card::before, .launch-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--gold);
+  border-style: solid;
+}
+.launch-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.launch-card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.launch-date {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--ash);
+  letter-spacing: 0.05em;
+}
+.launch-time {
+  font-size: 10px;
+  color: var(--ember);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--mist);
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* NAV */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,8,16,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,79,42,0.3);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sticky-nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  padding: 14px 20px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+  white-space: nowrap;
+  text-decoration: none;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-item:hover { color: var(--ember); background: rgba(201,79,42,0.05); }
+
+/* LAYOUT */
+.container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+/* SECTIONS */
+section {
+  padding: 72px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.section-num {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-num::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(201,79,42,0.4), transparent);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.15;
+  margin-bottom: 28px;
+  color: var(--ash);
+}
+
+h3 {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 36px 0 14px;
+}
+
+p { margin-bottom: 16px; color: rgba(240,237,232,0.8); line-height: 1.85; }
+
+/* WHY MAY 26 */
+.rationale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  margin-top: 32px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.rationale-cell {
+  background: var(--smoke);
+  padding: 24px 20px;
+  transition: background 0.2s;
+}
+.rationale-cell:hover { background: rgba(201,79,42,0.08); }
+.rationale-cell .icon { font-size: 1.4rem; margin-bottom: 10px; }
+.rationale-cell h4 {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 8px;
+}
+.rationale-cell p { font-size: 13px; margin: 0; line-height: 1.6; }
+
+/* POSTING TIMES TABLE */
+.times-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 12px;
+}
+.times-table th {
+  background: rgba(201,79,42,0.15);
+  color: var(--ember);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(201,79,42,0.3);
+}
+.times-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  vertical-align: top;
+}
+.times-table tr:hover td { background: rgba(255,255,255,0.02); }
+.platform-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid;
+  margin-right: 4px;
+}
+.badge-ig { border-color: var(--rose); color: var(--rose); }
+.badge-tt { border-color: var(--ember); color: var(--ember); }
+.badge-x { border-color: var(--mist); color: var(--mist); }
+.badge-th { border-color: var(--gold); color: var(--gold); }
+
+/* TIMELINE */
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  margin: 28px 0 0;
+  background: linear-gradient(to right, rgba(201,79,42,0.12), transparent);
+  border-left: 3px solid var(--ember);
+}
+.phase-header.gold-phase { border-left-color: var(--gold); background: linear-gradient(to right, rgba(201,150,58,0.12), transparent); }
+.phase-header.mist-phase { border-left-color: var(--mist); background: linear-gradient(to right, rgba(122,138,154,0.12), transparent); }
+.phase-header.launch-phase { border-left-color: var(--rose); background: linear-gradient(to right, rgba(176,80,96,0.15), transparent); }
+.phase-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+}
+.phase-label.gold { color: var(--gold); }
+.phase-label.mist-col { color: var(--mist); }
+.phase-label.launch-col { color: var(--rose); }
+.phase-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ash);
+}
+.phase-dates {
+  font-size: 10px;
+  color: var(--mist);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.day-block {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.day-block:last-child { border-bottom: none; }
+.day-label {
+  padding: 20px 16px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+}
+.day-name {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.day-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgba(240,237,232,0.5);
+  line-height: 1;
+}
+.day-content { padding: 20px 24px; }
+.day-content h4 {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 10px;
+}
+.task-list { list-style: none; padding: 0; }
+.task-list li {
+  padding: 5px 0 5px 20px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(240,237,232,0.75);
+}
+.task-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--ember);
+  font-size: 10px;
+  top: 7px;
+}
+.task-list li strong { color: var(--ash); }
+.task-list li em { color: var(--gold); font-style: normal; }
+
+/* LAUNCH DAY SPECIAL */
+.launch-day-block {
+  background: linear-gradient(135deg, rgba(201,79,42,0.08) 0%, rgba(176,80,96,0.08) 100%);
+  border: 1px solid rgba(201,79,42,0.3);
+  margin: 24px 0;
+}
+.launch-time-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  border-bottom: 1px solid rgba(201,79,42,0.15);
+  align-items: start;
+}
+.launch-time-row:last-child { border-bottom: none; }
+.ltr-time {
+  padding: 16px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ember);
+  border-right: 1px solid rgba(201,79,42,0.2);
+  background: rgba(201,79,42,0.05);
+}
+.ltr-action {
+  padding: 16px 20px;
+  font-size: 13px;
+  color: rgba(240,237,232,0.85);
+  line-height: 1.6;
+}
+.ltr-action strong { color: var(--ash); }
+
+/* VIRAL FORMULAS */
+.formula {
+  border-left: 2px solid var(--ember);
+  padding: 20px 24px;
+  margin: 20px 0;
+  background: rgba(201,79,42,0.05);
+  position: relative;
+}
+.formula::before {
+  content: attr(data-label);
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: var(--void);
+  padding: 0 8px;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.formula p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ash);
+  margin: 0;
+  line-height: 1.7;
+}
+.formula .note {
+  font-family: 'Space Mono', monospace;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--mist);
+  margin-top: 10px;
+}
+
+/* INFLUENCER TABLE */
+.inf-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 12px;
+}
+.inf-table th {
+  background: rgba(201,150,58,0.1);
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(201,150,58,0.25);
+}
+.inf-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.inf-table tr:hover td { background: rgba(255,255,255,0.02); }
+.priority-1 { color: var(--ember); }
+.priority-2 { color: var(--gold); }
+.priority-3 { color: var(--mist); }
+.handle {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+}
+.follower-count {
+  font-size: 10px;
+  color: var(--mist);
+  letter-spacing: 0.1em;
+}
+
+/* DM TEMPLATE */
+.dm-box {
+  background: var(--smoke);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 28px 28px 28px 36px;
+  margin: 20px 0;
+  position: relative;
+  font-size: 13px;
+}
+.dm-box::before {
+  content: '"';
+  position: absolute;
+  left: 10px;
+  top: 16px;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: rgba(201,79,42,0.3);
+  line-height: 1;
+}
+.dm-box p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ash);
+  margin: 0;
+  line-height: 1.75;
+}
+.dm-box .dm-note {
+  font-family: 'Space Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  color: var(--mist);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* PRESS RELEASE */
+.press-doc {
+  background: #faf9f7;
+  color: #1a1a1a;
+  padding: 48px 44px;
+  margin: 24px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  line-height: 1.85;
+}
+.press-doc .press-header {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #888;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+}
+.press-doc h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111;
+  margin-bottom: 6px;
+}
+.press-doc .dateline {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #888;
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+}
+.press-doc p { color: #2a2a2a; font-size: 13px; }
+.press-doc .placeholder { color: #c94f2a; font-style: italic; }
+.press-doc .boilerplate {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #999;
+}
+.press-doc .end-mark {
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 16px;
+  letter-spacing: 0.3em;
+}
+
+/* BSV SECTION */
+.bsv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(201,150,58,0.2);
+  margin-top: 24px;
+  border: 1px solid rgba(201,150,58,0.2);
+}
+@media (max-width: 600px) { .bsv-grid { grid-template-columns: 1fr; } }
+.bsv-cell {
+  background: var(--smoke);
+  padding: 24px 20px;
+}
+.bsv-cell h4 {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.bsv-cell p { font-size: 13px; line-height: 1.65; }
+.bsv-cell ul { list-style: none; padding: 0; margin-top: 8px; }
+.bsv-cell ul li {
+  padding: 4px 0 4px 16px;
+  position: relative;
+  font-size: 12px;
+  color: rgba(240,237,232,0.75);
+}
+.bsv-cell ul li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 6px; top: 9px; }
+
+/* CHECKLIST */
+.master-checklist { list-style: none; padding: 0; margin-top: 20px; }
+.master-checklist li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: start;
+}
+.master-checklist li:last-child { border-bottom: none; }
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--ember);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 10px;
+  color: var(--ember);
+}
+.check-body { font-size: 13px; line-height: 1.6; color: rgba(240,237,232,0.85); }
+.check-body strong { color: var(--ash); display: block; margin-bottom: 2px; }
+.check-body .check-note {
+  font-size: 11px;
+  color: var(--mist);
+  display: block;
+  margin-top: 3px;
+}
+
+/* CAPTION TEMPLATES */
+.caption-card {
+  border: 1px solid rgba(255,255,255,0.07);
+  margin: 16px 0;
+  overflow: hidden;
+}
+.caption-platform {
+  background: rgba(255,255,255,0.04);
+  padding: 8px 16px;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.caption-platform span { color: var(--ember); }
+.caption-body {
+  padding: 20px 20px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ash);
+  line-height: 1.75;
+}
+.caption-tags {
+  padding: 10px 20px 16px;
+  font-size: 11px;
+  color: var(--mist);
+  font-style: normal;
+  font-family: 'Space Mono', monospace;
+}
+
+/* PRESS TARGETS */
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.press-card {
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 18px 16px;
+  background: rgba(255,255,255,0.02);
+}
+.press-card .outlet {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 4px;
+}
+.press-card .angle {
+  font-size: 11px;
+  color: var(--mist);
+  line-height: 1.5;
+}
+.press-card .priority-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 8px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--ember);
+  color: var(--ember);
+}
+.press-card .priority-tag.gold { border-color: var(--gold); color: var(--gold); }
+
+/* FOOTER */
+.site-footer {
+  background: var(--smoke);
+  border-top: 1px solid rgba(201,79,42,0.3);
+  padding: 56px 32px;
+  text-align: center;
+}
+.footer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  color: var(--ash);
+  margin-bottom: 8px;
+}
+.footer-sub {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 32px;
+}
+.footer-mantra {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ember);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .day-block { grid-template-columns: 1fr; }
+  .day-label { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .launch-time-row { grid-template-columns: 80px 1fr; }
+  .bsv-grid { grid-template-columns: 1fr; }
+  .press-doc { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Complete Launch Battle Plan · ChefMyKLove · Nanaimo BC → World</div>
+  <div class="hero-title">
+    <span class="naked">We're </span><span class="exclaim">Naked!</span>
+  </div>
+  <div class="hero-subtitle">A Rapture in Three Acts</div>
+  <div class="hero-author">by ChefMyKLove</div>
+  <div class="launch-card">
+    <div class="launch-date">Tuesday, May 26, 2026</div>
+    <div class="launch-time">9:00 AM PDT · All Channels · Global Drop</div>
+  </div>
+  <div class="scroll-hint">↓ scroll for the full plan</div>
+</div>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <a href="#why" class="nav-item">01 · Why May 26</a>
+  <a href="#times" class="nav-item">02 · Post Times</a>
+  <a href="#foundation" class="nav-item">03 · Foundation</a>
+  <a href="#timeline" class="nav-item">04 · Timeline</a>
+  <a href="#launchday" class="nav-item">05 · Launch Day</a>
+  <a href="#viral" class="nav-item">06 · Viral Strategy</a>
+  <a href="#captions" class="nav-item">07 · Caption Copy</a>
+  <a href="#influencers" class="nav-item">08 · Influencers</a>
+  <a href="#press" class="nav-item">09 · Press</a>
+  <a href="#bsv" class="nav-item">10 · BSV Strategy</a>
+  <a href="#checklist" class="nav-item">11 · Master Checklist</a>
+</nav>
+
+<div class="container">
+
+<!-- 01 WHY MAY 26 -->
+<section id="why">
+  <div class="section-num">01 · The Date</div>
+  <h2>Why Tuesday, May 26 at 9 AM PDT</h2>
+  <p>Every variable has been weighed — platform algorithm peaks, your audience geography, Canada's holiday calendar, and the emotional arc of a 22-day build. This is your moment.</p>
+  <div class="rationale-grid">
+    <div class="rationale-cell">
+      <div class="icon">📅</div>
+      <h4>Tuesday Convergence</h4>
+      <p>Tuesday at 9 AM is the single strongest convergence point across Instagram, Threads, X, and TikTok simultaneously. Wednesday leads for raw Instagram engagement, but Tuesday wins across all platforms at once.</p>
+    </div>
+    <div class="rationale-cell">
+      <div class="icon">🇨🇦</div>
+      <h4>Post-Victoria Day Rebound</h4>
+      <p>May 26 is the Tuesday after Victoria Day weekend — Canadians return to their desks scrolling hard after a long weekend. This post-holiday rebound is a hidden gem for Canadian creators targeting local and national audiences first.</p>
+    </div>
+    <div class="rationale-cell">
+      <div class="icon">🌊</div>
+      <h4>Two Launch Moments</h4>
+      <p>9 AM PDT for Instagram/Threads/X (morning peak), then a second standalone TikTok drop at 3 PM PDT riding the 2–6 PM TikTok global peak. You get two distinct launch waves in one day.</p>
+    </div>
+    <div class="rationale-cell">
+      <div class="icon">⏱</div>
+      <h4>22-Day Perfect Runway</h4>
+      <p>Starting today (May 4) gives exactly 22 days — enough for three distinct phases: Seed, Build, Ignite. Long enough to build real anticipation. Short enough to maintain urgency and your own momentum.</p>
+    </div>
+    <div class="rationale-cell">
+      <div class="icon">🔁</div>
+      <h4>Weekend Tail Effect</h4>
+      <p>A Tuesday launch gives your content 4 full days of algorithmic momentum before the weekend — when shares and saves spike again organically. You'll get a second natural engagement peak May 30–31.</p>
+    </div>
+    <div class="rationale-cell">
+      <div class="icon">₿</div>
+      <h4>BSV Community Timing</h4>
+      <p>The BSV/crypto community is most active Tuesday–Thursday on X. Your blockchain mint announcement and ordinal news lands in their peak window on the same day as your literary launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 POSTING TIMES -->
+<section id="times">
+  <div class="section-num">02 · Posting Schedule</div>
+  <h2>Optimal Times, Every Day</h2>
+  <p>All times are PDT (Nanaimo, BC). These are your daily windows for the entire campaign — not just launch day.</p>
+  <table class="times-table">
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Primary Post Time</th>
+        <th>Second Post</th>
+        <th>Priority Days</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="platform-badge badge-ig">Instagram</span></td>
+        <td>9:00 AM</td>
+        <td>—</td>
+        <td>Tue, Wed, Thu</td>
+        <td>Reels get 4–8× more reach than static posts. One great Reel &gt; five static posts.</td>
+      </tr>
+      <tr>
+        <td><span class="platform-badge badge-tt">TikTok</span></td>
+        <td>9–10 AM</td>
+        <td>3–5 PM</td>
+        <td>Every day</td>
+        <td>Post once daily minimum. Daily creators outperform 3×/week creators by 3:1 on follower growth.</td>
+      </tr>
+      <tr>
+        <td><span class="platform-badge badge-x">X / Twitter</span></td>
+        <td>9:00 AM</td>
+        <td>2:00 PM</td>
+        <td>Tue–Thu</td>
+        <td>Morning tease + afternoon engagement push. Reply to your own tweet at 2 PM with a mood line.</td>
+      </tr>
+      <tr>
+        <td><span class="platform-badge badge-th">Threads</span></td>
+        <td>9:00 AM</td>
+        <td>—</td>
+        <td>Weekdays</td>
+        <td>Mirror Instagram captions with slight edits. Threads algo rewards conversation — ask a question.</td>
+      </tr>
+      <tr>
+        <td><span class="platform-badge badge-ig">Facebook</span></td>
+        <td>1–3 PM</td>
+        <td>—</td>
+        <td>Wed, Fri</td>
+        <td>Use for local Nanaimo groups and community pages. Different audience than your main platforms.</td>
+      </tr>
+      <tr>
+        <td><span class="platform-badge badge-x">YouTube</span></td>
+        <td>2–4 PM</td>
+        <td>—</td>
+        <td>Fri, Sat</td>
+        <td>Upload your Lives as YouTube VODs. Title them with searchable terms: "indie author vlog" + story title.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 03 FOUNDATION -->
+<section id="foundation">
+  <div class="section-num">03 · Foundation Week</div>
+  <h2>May 4–11: Infrastructure First. Nothing Public Yet.</h2>
+  <p>This week is invisible work. You're building the machine before you turn it on. Every day this week, complete one item from the list below. Don't skip any of them — these are the load-bearing walls of your launch.</p>
+
+  <h3>Infrastructure Checklist (May 4–11)</h3>
+  <ul class="master-checklist">
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Set up your universal link hub (Linktree or Beacons.ai)</strong>
+        One URL goes everywhere. It links to: story purchase page ($2.99), BSV Ordinal mint page ($100), email list signup, and your press kit PDF.
+        <span class="check-note">Do this first. Every other step depends on having one clean link.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Finalize cover art in all three formats</strong>
+        1:1 square for Instagram feed, 9:16 vertical for Reels/TikTok/Stories, 16:9 horizontal for X header.
+        <span class="check-note">All three must be done before anything goes public. Canva works. Hire on Fiverr ($50–150) if needed.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Write your author bio in three lengths</strong>
+        One sentence (for bios), one paragraph (for press), one full page (for long-form interviews and press kit).
+        <span class="check-note">Your ChefMyKLove identity, Nanaimo roots, and the story's emotional DNA all belong here.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Set up Goodreads and StoryGraph</strong>
+        Add We're Naked! — A Rapture in Three Acts. Mark it "Want to Read." This seeds discovery before launch.
+        <span class="check-note">Literary readers use these platforms as their discovery engine. Your book needs to exist there.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Build your email welcome sequence (even if you have 3 subscribers)</strong>
+        Email 1: Welcome + why this story exists. Email 2: The BSV ordinal explained. Email 3: Launch week preview.
+        <span class="check-note">Your email list is the only audience you own. Every other platform can vanish. The list stays.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Mint your BSV ordinals and test the burn mechanic end-to-end</strong>
+        Decide your edition cap (recommended: 50–100). Ensure the physical redemption process works before you announce it.
+        <span class="check-note">Test it yourself first. You cannot announce a mechanic that isn't functional.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Create your press kit PDF</strong>
+        Include: story synopsis (3 lines), author bio, cover art, logline, BSV ordinal info, contact details, and high-res photo.
+        <span class="check-note">Journalists and bloggers need one document they can use immediately. Make it easy for them.</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body">
+        <strong>Research and list 30 influencers to DM (see Section 08)</strong>
+        Build a simple spreadsheet: name, handle, platform, follower count, what you'll reference in your DM, status.
+        <span class="check-note">You'll start DM outreach May 12–15. Having the list ready means you don't lose momentum.</span>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- 04 TIMELINE -->
+<section id="timeline">
+  <div class="section-num">04 · Campaign Timeline</div>
+  <h2>Day-by-Day Battle Plan</h2>
+
+  <!-- PHASE 1 -->
+  <div class="phase-header">
+    <div class="phase-label">Phase 1</div>
+    <div class="phase-title">Seed — Build Intrigue</div>
+    <div class="phase-dates">May 12–15</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Mon</div><div class="day-date">12</div></div>
+    <div class="day-content">
+      <h4>The First Post — Mystery Only</h4>
+      <ul class="task-list">
+        <li><strong>9 AM:</strong> Post a fragment of your cover — heavily cropped, atmospheric. No title visible. All platforms.</li>
+        <li>Caption: <em>"Something is ending. Something is beginning. May 26."</em> Full hashtag set (see Section 07).</li>
+        <li><strong>2 PM:</strong> Reply to your own X tweet with one haunting mood line from the story. Not a spoiler — a feeling.</li>
+        <li>Update all bio links to your universal Linktree. The link is live from today.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Tue</div><div class="day-date">13</div></div>
+    <div class="day-content">
+      <h4>Behind the Scenes — Personal + Raw</h4>
+      <ul class="task-list">
+        <li>Photo or short video: your workspace, your hands on the manuscript, the physical copy existing in the world.</li>
+        <li>Caption talks about what this story <em>cost you emotionally</em> to write. Be honest and specific.</li>
+        <li>Your queer, artistic identity lives here naturally — present, not performed or announced.</li>
+        <li>TikTok: 30-second voiceover version. Aesthetic b-roll of writing space + soft audio.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Wed</div><div class="day-date">14</div></div>
+    <div class="day-content">
+      <h4>The BSV Ordinal Tease — Your Category of One</h4>
+      <ul class="task-list">
+        <li>Post specifically about the 100-edition BSV Ordinal on X and Threads. Frame it: <em>this is a collectible artifact, not just a story.</em></li>
+        <li>Explain simply: burn the digital ordinal → receive the signed IRL physical edition. The ritual matters.</li>
+        <li>Hashtags: <strong>#BSV #BitcoinSV #DigitalCollectibles #Ordinals #IndiePublishing #LiteraryFiction</strong></li>
+        <li>No other indie author is doing this. Lean into the novelty explicitly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Thu</div><div class="day-date">15</div></div>
+    <div class="day-content">
+      <h4>First Influencer DM Wave — 10 Messages</h4>
+      <ul class="task-list">
+        <li>Send 10 personalized DMs using the formula in Section 08. Reference something specific they posted.</li>
+        <li>Priority targets: BookTok literary accounts + atmospheric/dreamy aesthetic accounts.</li>
+        <li>Offer a free digital ARC. No obligation, no pressure. Make it easy to say yes.</li>
+        <li>TikTok post: a "vibes" collage — 4–5 images representing your story's mood. No words. Let the atmosphere speak.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-header gold-phase">
+    <div class="phase-label gold">Phase 2</div>
+    <div class="phase-title">Build the Wave</div>
+    <div class="phase-dates">May 16–22</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Fri</div><div class="day-date">16</div></div>
+    <div class="day-content">
+      <h4>Title + Logline Announcement</h4>
+      <ul class="task-list">
+        <li>First time you say the title publicly: <em>We're Naked! — A Rapture in Three Acts.</em></li>
+        <li>Post a partial cover reveal (still not full). Three words of logline: surreal, apocalyptic, intimate.</li>
+        <li>Instagram Reel: atmospheric 30-second visual with title reveal moment. This is your most shareable week-one piece.</li>
+        <li>Pin this post to the top of all profiles.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Sat</div><div class="day-date">17</div></div>
+    <div class="day-content">
+      <h4>The Excerpt Drop</h4>
+      <ul class="task-list">
+        <li>Post 3–5 of the most emotionally charged sentences from the story. No context. Let them land raw.</li>
+        <li>This is your most shareable content type — literary readers share excerpts that hit them.</li>
+        <li>Instagram: typographic treatment — beautiful text on a moody background image.</li>
+        <li>X: thread format — one sentence per tweet, building to the final devastating line.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Sun</div><div class="day-date">18</div></div>
+    <div class="day-content">
+      <h4>Rest + Engage</h4>
+      <ul class="task-list">
+        <li>No new content post. Spend this time replying to every comment from the last 6 days.</li>
+        <li>Follow and engage with 10–15 BookTok / BookStagram accounts you haven't yet connected with.</li>
+        <li>Stories only: share your own previous posts to Stories with a "have you seen this?" frame.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Mon</div><div class="day-date">19</div></div>
+    <div class="day-content">
+      <h4>Press Release Goes Out — Local + Literary Outlets</h4>
+      <ul class="task-list">
+        <li>Send the press release (Section 09) to all Nanaimo media. Lead with the local angle.</li>
+        <li>Send the literary version to BC Review, Queer literary publications, indie lit blogs.</li>
+        <li>Post: <em>"Launching from Nanaimo, BC, to the world."</em> Tag local businesses, tag the city. This gets shared locally.</li>
+        <li>Second influencer DM wave: 10 more messages.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Tue</div><div class="day-date">20</div></div>
+    <div class="day-content">
+      <h4>"Why I Wrote This" Video — 60 Seconds</h4>
+      <ul class="task-list">
+        <li>Talking head or voiceover Reel. Personal, vulnerable, honest. What does apocalypse mean to you?</li>
+        <li>This post earns followers who will care about everything you make next — not just this story.</li>
+        <li>TikTok: post this natively (do not just repost the Instagram version). TikTok rewards native content.</li>
+        <li>X: thread version — the same story written out in 5–6 tweets.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Wed</div><div class="day-date">21</div></div>
+    <div class="day-content">
+      <h4>Full Cover Art Reveal</h4>
+      <ul class="task-list">
+        <li>No crop. No tease. Full cover, full title. This is the moment people save and share.</li>
+        <li>Caption: <em>"Five days."</em> Nothing else. Let the art speak.</li>
+        <li>Instagram carousel: cover art + 3 mood images that represent the story's world.</li>
+        <li>Update all profile photos and headers to the cover art.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Thu</div><div class="day-date">22</div></div>
+    <div class="day-content">
+      <h4>The Limited Edition Urgency Post</h4>
+      <ul class="task-list">
+        <li>Announce the BSV ordinal edition cap (e.g. 50 editions). "Once they're gone, the burn mechanic is gone forever."</li>
+        <li>Make the scarcity real and specific. List how many are available. Show the number.</li>
+        <li>Email blast to your list: preview the launch, share the ordinal details, give list subscribers first access.</li>
+        <li>Third influencer DM wave: 10 more. Follow up with anyone who hasn't replied from wave 1 or 2.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-header mist-phase">
+    <div class="phase-label mist-col">Phase 3</div>
+    <div class="phase-title">Countdown — Ignite</div>
+    <div class="phase-dates">May 23–25</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Fri</div><div class="day-date">23</div></div>
+    <div class="day-content">
+      <h4>3 Days Out — Most Devastating Line</h4>
+      <ul class="task-list">
+        <li>Post the single most emotionally devastating line in your story. One sentence. Big font. No context.</li>
+        <li>Caption: <em>"Three days."</em> That's it. Maximum emotional tension.</li>
+        <li>Stories: countdown sticker to May 26, 9 AM. Share to every Story channel.</li>
+        <li>TikTok: duet or stitch a relevant BookTok creator's video with your perspective. New audience for free.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Sat</div><div class="day-date">24</div></div>
+    <div class="day-content">
+      <h4>Go Live — First Reading</h4>
+      <ul class="task-list">
+        <li>15–20 minute TikTok or Instagram Live. Saturday evening is strong for TikTok Live specifically.</li>
+        <li>Read your opening paragraph. Pause. Let the silence land. Answer questions. Show the physical manuscript.</li>
+        <li>Be nervous and real — that's the content. Authenticity on Lives outperforms polish every time.</li>
+        <li>Pin the purchase link in comments before you start. Save the Live and clip it for Reels immediately after.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label"><div class="day-name">Sun</div><div class="day-date">25</div></div>
+    <div class="day-content">
+      <h4>Eve of Launch — The Most Human Post</h4>
+      <ul class="task-list">
+        <li>Handwritten note on paper — your dedication line, or the first sentence of the story. Photo of your hand holding it.</li>
+        <li>Caption: <em>"Tomorrow."</em> Single word. Pin to top of every profile.</li>
+        <li>Reminder DMs to every influencer who hasn't responded: <em>"Launches tomorrow. Offer still stands."</em></li>
+        <li>Final pre-launch email to your list. Subject: <em>"Tomorrow's the day."</em> Include an early-access discount code.</li>
+        <li>Prepare all your launch day posts and have them ready to send at the right times.</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- 05 LAUNCH DAY -->
+<section id="launchday">
+  <div class="section-num">05 · Launch Day</div>
+  <h2>Tuesday, May 26 — Minute by Minute</h2>
+  <p>Every hour of this day is planned. You've built to this. Execute it exactly.</p>
+
+  <div class="launch-day-block">
+    <div class="launch-time-row">
+      <div class="ltr-time">9:00 AM</div>
+      <div class="ltr-action"><strong>THE MAIN POST — All Channels Simultaneously.</strong> Full cover art. Full caption with logline, purchase link (your Linktree), and 10–12 hashtags. Instagram, Threads, X, Facebook all go at once. This is the post you've been building to for 22 days.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">9:30 AM</div>
+      <div class="ltr-action"><strong>Email blast to your list.</strong> Subject: "We're Naked! is live." Short, personal, direct link to purchase. Thank them for being here before anyone else.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">10:00 AM</div>
+      <div class="ltr-action"><strong>Reply to every single comment from the first hour.</strong> Early engagement velocity is everything — the first 60–90 minutes determine algorithmic reach. Your replies count as engagement signals. Do not stop replying.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">12:00 PM</div>
+      <div class="ltr-action"><strong>X / Twitter midday push.</strong> Quote-tweet your own morning announcement with a single excerpt line. Fresh energy, different reach, catches the afternoon X wave that peaks 12–3 PM.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">2:00 PM</div>
+      <div class="ltr-action"><strong>Personal DM blast to everyone who engaged.</strong> Anyone who liked, commented, or shared the morning post gets: <em>"Thank you for showing up for this. Here's the direct link: [link]. Means everything."</em> This converts followers into buyers.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">3:00 PM</div>
+      <div class="ltr-action"><strong>TikTok Launch Reel — standalone, native content only.</strong> 30–60 seconds. Moody visuals, voiceover excerpt, trending atmospheric audio. This is NOT a repost of your Instagram content. TikTok rewards native creation. Drop the buy link in bio, reference it in caption.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">6:00 PM</div>
+      <div class="ltr-action"><strong>Instagram Stories sequence.</strong> "It's out." → cover art → link sticker → personal thank-you video. Stories reach people who never saw your feed post. This is your second launch to a different subset of your audience.</div>
+    </div>
+    <div class="launch-time-row">
+      <div class="ltr-time">Evening</div>
+      <div class="ltr-action"><strong>Go Live — 30 to 60 minutes.</strong> Celebrate, read, answer questions. Talk about the BSV ordinals and what the burn mechanic means to you personally. Let people see you exist and feel something. Save it, clip it, post it the next day.</div>
+    </div>
+  </div>
+
+  <h3>May 27 – June 8: Sustain the Momentum</h3>
+  <p>This is where most indie launches die. Yours will not.</p>
+  <ul class="task-list" style="margin-top:12px;">
+    <li>Post reader reactions <em>the moment you get them</em>. One person saying "this wrecked me" is more powerful than any marketing copy you write.</li>
+    <li><strong>June 2 (Monday):</strong> "Week 1 reflections" post. Be honest about what launch day felt like. Vulnerability content consistently outperforms promotional content.</li>
+    <li>Pitch a second wave of press to any outlet that didn't respond. Lead with: <em>"Now available and generating reader response — happy to provide review copy."</em></li>
+    <li>Keep posting to TikTok daily. The algorithm doesn't care you just launched. It rewards consistency above everything.</li>
+    <li>Post your BSV ordinal mint transaction on X with #BSV. Crypto community shares mint announcements — zero overlap with BookTok means double the reach for identical content.</li>
+    <li><strong>Mid-June:</strong> Announce the physical IRL Collectors' Edition as its own separate campaign beat. Frame it as a new story: <em>"The ordinal burns. The book appears in your hands."</em> Photograph it beautifully. This is its own news moment.</li>
+  </ul>
+</section>
+
+<!-- 06 VIRAL STRATEGY -->
+<section id="viral">
+  <div class="section-num">06 · Viral Strategy</div>
+  <h2>Tripping the Algorithm — What Actually Works</h2>
+
+  <h3>The Four Viral Post Formulas for Your Story</h3>
+
+  <div class="formula" data-label="Formula 01 · The Devastating Line Drop">
+    <p>"I wrote a love story about two people at the end of the world. One line broke me while I was writing it. Here it is: [YOUR LINE]. It drops May 26. $2.99. Link in bio."</p>
+    <div class="note">Why it works: Emotional specificity + low price point = impulse purchase. The single line creates desire to read the context around it.</div>
+  </div>
+
+  <div class="formula" data-label="Formula 02 · The Exclusion Hook">
+    <p>"We're Naked! is NOT for you if you need love stories to end happily. It IS for you if you've ever loved someone so much that existing near them was its own kind of apocalypse."</p>
+    <div class="note">Why it works: Exclusion triggers self-identification. People immediately want to prove they can handle it. They tag friends who "need this."</div>
+  </div>
+
+  <div class="formula" data-label="Formula 03 · The Authenticity Post">
+    <p>"I wrote this in Nanaimo, BC. Alone. In winter. It's the most honest thing I've ever made and I'm terrified you'll read it. Releasing May 26. I think I need you to read it."</p>
+    <div class="note">Why it works: Vulnerability + geographic specificity = shareability. Local pride + emotional honesty is a combination that travels far.</div>
+  </div>
+
+  <div class="formula" data-label="Formula 04 · The BSV Burn Mechanic (Category of One)">
+    <p>"My story exists in three forms: a $2.99 digital download. A $100 HTML ordinal on the BSV blockchain — one of 50, ever. And an IRL physical edition you can ONLY get by burning your ordinal. Yes. Burning it. Some things are more beautiful when they can't be replicated."</p>
+    <div class="note">Why it works: Genuinely novel. Tech Twitter, BSV collectors, NFT communities, and literary circles will all engage with this from entirely different angles — triple audience, one post.</div>
+  </div>
+
+  <h3>Comment Bait That's Genuine</h3>
+  <p>End posts with a question people actually want to answer:</p>
+  <ul class="task-list">
+    <li><em>"What's the last thing that felt like a kind of rapture to you?"</em> — open and atmospheric, matches your story's world</li>
+    <li><em>"Tag someone who would read a love story that doesn't have a happy ending."</em> — drives reach through tagging</li>
+    <li><em>"Finish the sentence: The worst kind of love is when ____."</em> — high comment volume, deeply shareable</li>
+    <li><em>"Do you prefer love stories that end happily or tragically?"</em> — poll format, then: "If you said tragic — I wrote something for you."</li>
+  </ul>
+
+  <h3>Hooks: First 3 Words Rule</h3>
+  <p>On every platform, the first three words determine whether anyone reads further. Never start a caption with "I", "So", or "Hi." Instead:</p>
+  <ul class="task-list">
+    <li><em>"Something is ending—"</em></li>
+    <li><em>"You won't survive—"</em></li>
+    <li><em>"Nobody told me—"</em></li>
+    <li><em>"What if love—"</em></li>
+    <li><em>"The world ends—"</em></li>
+  </ul>
+
+  <h3>Live Strategy — What to Do Once You're On</h3>
+  <ul class="task-list">
+    <li>Ask <em>"Where are you watching from?"</em> in the first 60 seconds. Comment engagement in the first minute signals the algorithm to push your Live to more people.</li>
+    <li>Read your opening paragraph. Then pause. Silence on a Live makes people stay to see what happens next.</li>
+    <li>Pin your purchase link in the Live comments before you start. Have a second window open so you can monitor comments while you're reading.</li>
+    <li>Do Q&A about the story's <em>themes</em> — not plot. Themes create emotional connection. "What does apocalypse mean to you?" after they've read it is the best possible follow-up conversation.</li>
+    <li>Save every Live. Clip 30–60 second highlights immediately. These become evergreen Reels and TikToks.</li>
+  </ul>
+
+  <h3>TikTok-Specific: Duet + Stitch Strategy</h3>
+  <ul class="task-list">
+    <li>Find BookTok creators talking about atmospheric, surreal, or queer literary fiction. Duet or Stitch their content with your perspective. This puts you in front of their audience for free.</li>
+    <li>Use trending audio from dreamcore, dark academia, or literary niches. You don't have to chase trends — but trending audio gives each video a placement boost.</li>
+    <li>Post natively. Never just repost your Instagram Reel to TikTok as-is. Film a version for TikTok specifically, even if it's the same subject matter.</li>
+  </ul>
+</section>
+
+<!-- 07 CAPTION TEMPLATES -->
+<section id="captions">
+  <div class="section-num">07 · Ready-to-Post Caption Copy</div>
+  <h2>Pre-Written Captions for Key Moments</h2>
+  <p>Copy, adapt, and use these. Fill in the [brackets] with your specifics. These are starting points — add your own voice on top.</p>
+
+  <div class="caption-card">
+    <div class="caption-platform">May 12 · First Teaser <span>All Platforms</span></div>
+    <div class="caption-body">Something is ending.<br>Something is beginning.<br><br>May 26.</div>
+    <div class="caption-tags">#WeAreNaked #LiteraryFiction #IndieAuthor #BookTok #ApocalypticRomance #Dreamscapes #QueerLit #NanaimoBC #ShortStory #NewRelease #ComingSoon #BSVOrdinals</div>
+  </div>
+
+  <div class="caption-card">
+    <div class="caption-platform">May 14 · BSV Tease <span>X / Threads</span></div>
+    <div class="caption-body">I minted my short story on the BSV blockchain.<br><br>100 editions. HTML ordinal. $100.<br><br>Burn the digital token → receive a signed, physical IRL edition. The ritual is the point.<br><br>No other short story works like this. May 26.</div>
+    <div class="caption-tags">#BSV #BitcoinSV #Ordinals #DigitalCollectibles #IndiePublishing #LiteraryFiction #WeAreNaked</div>
+  </div>
+
+  <div class="caption-card">
+    <div class="caption-platform">May 21 · Full Cover Reveal <span>Instagram / TikTok</span></div>
+    <div class="caption-body">We're Naked! — A Rapture in Three Acts.<br><br>Five days.<br><br>$2.99 digital. $100 BSV ordinal edition — [NUMBER] copies, ever. Link in bio.</div>
+    <div class="caption-tags">#WeAreNaked #CoverReveal #IndieAuthor #BookTok #LiteraryFiction #ApocalypticRomance #QueerBooks #NanaimoBC #NewBook</div>
+  </div>
+
+  <div class="caption-card">
+    <div class="caption-platform">May 25 · Eve of Launch <span>All Platforms</span></div>
+    <div class="caption-body">Tomorrow.</div>
+    <div class="caption-tags">#WeAreNaked #TomorrowIsTheDay #IndieAuthor #LaunchDay</div>
+  </div>
+
+  <div class="caption-card">
+    <div class="caption-platform">May 26 · Launch — 9 AM <span>All Platforms</span></div>
+    <div class="caption-body">We're Naked! — A Rapture in Three Acts is out now.<br><br>A surreal, apocalyptic love story about what two people say to each other when the sky stops being the sky.<br><br>Whimsical. Devastating. Real.<br><br>$2.99 digital edition. $100 BSV ordinal — [NUMBER] copies, signed, with IRL burn redemption. Link in bio.<br><br>I made this for you. It's out now. Go read it.</div>
+    <div class="caption-tags">#WeAreNaked #OutNow #IndieAuthor #BookTok #LiteraryFiction #ApocalypticRomance #QueerLit #NanaimoBC #NewRelease #BSVOrdinals #ShortStory #IndieBooks</div>
+  </div>
+
+</section>
+
+<!-- 08 INFLUENCERS -->
+<section id="influencers">
+  <div class="section-num">08 · Influencer Strategy</div>
+  <h2>Your Three Audiences — Finding Every One of Them</h2>
+  <p>For We're Naked! you have three distinct communities to reach simultaneously. Zero audience overlap between them. That's three times the reach for one story.</p>
+
+  <h3>Priority Targets — BookTok & Literary Instagram</h3>
+  <table class="inf-table">
+    <thead>
+      <tr><th>Handle</th><th>Platform</th><th>Size</th><th>Vibe</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="handle">@bookrvws</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">57.6K</span></td>
+        <td>Lit fic focused, atmospheric recommendations</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@etherealacademia</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">58.2K</span></td>
+        <td>Literary / atmospheric — exact match for your vibe</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@postcardsbyelle</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">96.4K</span></td>
+        <td>Recommendation-driven, strong engagement rate</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@lbhreads</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">77.6K</span></td>
+        <td>UK lit fic audience — international reach</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@zoes_reads</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">67.9K</span></td>
+        <td>Literary fiction, engaged community</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@bookish_al</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">48.7K</span></td>
+        <td>Atmospheric, dreamy reader — exact tone match</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">@makaylasamountry</span></td>
+        <td>TikTok</td>
+        <td><span class="follower-count">48.4K</span></td>
+        <td>Queer identity, books + thrifting — organic fit</td>
+        <td><span class="priority-1">● 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="handle">#bookstagram + #literaryfiction</span></td>
+        <td>Instagram</td>
+        <td><span class="follower-count">5K–50K</span></td>
+        <td>Search: posts with 500–5K likes. Follow, comment 3×, then DM.</td>
+        <td><span class="priority-2">● 2</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Where to Find More (Free, No Tools)</h3>
+  <ul class="task-list" style="margin-top:12px;">
+    <li>TikTok hashtag combos: <em>#litfic + #apocalyptic</em> / <em>#darkromance + #dreamcore</em> / <em>#queerbooks + #indieauthor</em> / <em>#surrealism + #booktok</em> / <em>#etherealaesthetic + #reading</em></li>
+    <li>Instagram: search <em>#bookstagram + #literaryfiction</em>. Look for posts with 500–5,000 likes — engaged mid-tier accounts. Comment genuinely 3 times over a week, then DM.</li>
+    <li>X/Twitter: search <em>"literary fiction" + "apocalyptic" + "romance"</em>. Quote-tweet with something thoughtful — warmer than a cold DM.</li>
+    <li>BSV/crypto: search X for <em>#BSV + #Ordinals</em> and <em>#BitcoinSV + #digitalcollectibles</em>. The BSV community is tight-knit. A genuine post about minting literary ordinals will be noticed — nobody else is doing literary fiction in that space.</li>
+  </ul>
+
+  <h3>The DM Formula That Gets Replies</h3>
+  <div class="dm-box">
+    <p>"Hey [name] — I've been following your [specific video or post they made] and the way you talk about [specific thing] made me think you might connect with what I'm releasing May 26. It's called We're Naked! — A Rapture in Three Acts. Surreal, apocalyptic, romantic, literary. Very dreamscapes-meets-end-of-world intimacy. I'm an indie author from Nanaimo BC and I'd love to send you a digital ARC to read before launch. No obligation. I just think you'd get it. — ChefMyKLove"</p>
+    <div class="dm-note">The key: reference something SPECIFIC they posted. Generic DMs get ignored. Personalized ones get read. Send 10 per day starting May 12. Aim for 30–40 total. Track responses in a simple spreadsheet.</div>
+  </div>
+</section>
+
+<!-- 09 PRESS -->
+<section id="press">
+  <div class="section-num">09 · Press Strategy</div>
+  <h2>Local to National — Who Gets the Release and When</h2>
+
+  <h3>Press Targets — Three Versions of Your Story</h3>
+  <div class="press-grid">
+    <div class="press-card">
+      <div class="outlet">Nanaimo News NOW</div>
+      <div class="angle">Lead with local angle: Nanaimo author launches debut literary work globally.</div>
+      <div class="priority-tag">Send May 19</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">Nanaimo Magazine</div>
+      <div class="angle">"Local creator to watch" — lifestyle + arts angle. Request a feature.</div>
+      <div class="priority-tag">Send May 19</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">The Discourse Nanaimo</div>
+      <div class="angle">Independent arts + culture. Pitch the community story behind the launch.</div>
+      <div class="priority-tag">Send May 19</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">CBC Vancouver Island</div>
+      <div class="angle">Local artist + global launch + blockchain innovation. Strong news hook.</div>
+      <div class="priority-tag">Send May 19</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">The British Columbia Review</div>
+      <div class="angle">Literary merit angle. Send a review copy. Request a review, not a feature.</div>
+      <div class="priority-tag gold">Send May 16</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">What's On Queer BC</div>
+      <div class="angle">Identity-forward version. Queer artist, surreal love story, body of work beginning.</div>
+      <div class="priority-tag gold">Send May 16</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">CoinGeek / BSV Association</div>
+      <div class="angle">First literary fiction minted as BSV ordinals with IRL burn redemption mechanic.</div>
+      <div class="priority-tag gold">Send May 14</div>
+    </div>
+    <div class="press-card">
+      <div class="outlet">Indie Literary Blogs</div>
+      <div class="angle">Pitch review copies. Search "indie literary fiction blog submissions" for current active ones.</div>
+      <div class="priority-tag">Send May 16</div>
+    </div>
+  </div>
+
+  <h3>Press Release Template — Local Version</h3>
+  <div class="press-doc">
+    <div class="press-header">For Immediate Release · [DATE] · Embargo Until May 26, 2026, 9:00 AM PDT</div>
+    <h4>Nanaimo Author ChefMyKLove Launches Debut Short Story Globally — Including World-First Literary BSV Blockchain "Burn Edition"</h4>
+    <div class="dateline">NANAIMO, BC — MAY [DATE], 2026</div>
+    <p>Nanaimo-based author and artist ChefMyKLove will release <em>We're Naked! — A Rapture in Three Acts</em> on May 26, 2026 — a surreal, apocalyptic short love story available simultaneously as a $2.99 digital download and a limited $100 premium HTML ordinal inscribed on the BSV blockchain.</p>
+    <p>The story, described by the author as "dreamscapes-meets-end-of-world intimacy," follows <span class="placeholder">[one-sentence description of the story's premise without spoilers]</span>. It is available in three editions: a standard digital download, a premium HTML ordinal (limited to <span class="placeholder">[NUMBER]</span> copies) minted on the BSV blockchain, and an IRL physical limited edition accessible only by burning the digital ordinal.</p>
+    <p>The burn mechanic — in which a collector permanently destroys their digital token in exchange for a signed, one-of-a-kind physical edition — mirrors the story's own themes of love, impermanence, and the things we surrender to hold something real.</p>
+    <p>"I wanted the way you receive this story to feel like the story itself," says ChefMyKLove. "The burn mechanic isn't a gimmick. It's the point."</p>
+    <p><em>We're Naked! — A Rapture in Three Acts</em> will be available beginning May 26 at <span class="placeholder">[your Linktree/website URL]</span>. The BSV ordinal edition is limited to <span class="placeholder">[NUMBER]</span> copies globally.</p>
+    <p>For media copies, interviews, or press inquiries, contact: <span class="placeholder">[your email]</span></p>
+    <div class="boilerplate">ABOUT CHEFMYKLOVE: ChefMyKLove is a writer and artist based in Nanaimo, British Columbia. <span class="placeholder">[One sentence about your background or creative practice.]</span> We're Naked! — A Rapture in Three Acts is their debut published short story.</div>
+    <div class="end-mark">— 30 —</div>
+  </div>
+</section>
+
+<!-- 10 BSV -->
+<section id="bsv">
+  <div class="section-num">10 · BSV Strategy</div>
+  <h2>The Blockchain Angle — Your Category of One</h2>
+  <p>No other literary fiction author is minting ordinals and offering a physical burn redemption. That novelty gives you press angles in three completely separate media ecosystems: literary, tech/crypto, and arts culture. One story, three entirely different press pitches, zero audience overlap.</p>
+
+  <div class="bsv-grid">
+    <div class="bsv-cell">
+      <h4>The Thematic Resonance</h4>
+      <p>The burn mechanic is not marketing — it's the story. A tragic love story about impermanence and surrender, where the most intimate edition can only be held after you give something up? That's not a gimmick. That's coherent art.</p>
+      <p>Lead with this in all your BSV communications. The resonance between the story's themes and the ordinal mechanic is what makes this genuinely interesting to literary and tech audiences alike.</p>
+    </div>
+    <div class="bsv-cell">
+      <h4>The Press Angles</h4>
+      <ul>
+        <li>Tech/Crypto: "First literary short story minted as a BSV ordinal with IRL burn redemption"</li>
+        <li>Literary: "Indie author uses blockchain to create a new kind of collectible literary object"</li>
+        <li>Arts/Culture: "A Nanaimo artist explores impermanence through a story you can only fully own by destroying part of it"</li>
+        <li>Local: "Nanaimo creator launches at the intersection of literature and Web3"</li>
+      </ul>
+    </div>
+    <div class="bsv-cell">
+      <h4>BSV Community Tactics</h4>
+      <ul>
+        <li>Post your mint transaction on X with #BSV on launch day — the community shares these</li>
+        <li>Contact the BSV Association about featuring this as a flagship literary use case</li>
+        <li>Join BSV Discord servers and announce the mint genuinely, not as a sales pitch</li>
+        <li>Search X for ordinal collectors and DM them with your unique literary angle</li>
+      </ul>
+    </div>
+    <div class="bsv-cell">
+      <h4>The Physical Edition Campaign (Mid-June)</h4>
+      <ul>
+        <li>Announce the IRL collectors' edition as its own separate campaign — fresh news moment</li>
+        <li>Frame: <em>"The ordinal burns. The book appears in your hands."</em></li>
+        <li>Photograph the physical edition beautifully — the ritual of the object matters</li>
+        <li>Document the first burn on video. That moment is its own viral content</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 MASTER CHECKLIST -->
+<section id="checklist">
+  <div class="section-num">11 · Master Checklist</div>
+  <h2>Everything That Has to Ship</h2>
+  <ul class="master-checklist">
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Linktree / Beacons.ai hub live with all four links</strong><span class="check-note">Story purchase ($2.99), BSV ordinal mint ($100), email list signup, press kit PDF</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Cover art in all three formats (1:1, 9:16, 16:9)</strong><span class="check-note">Non-negotiable before anything goes public</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Author bio in three lengths written and approved</strong><span class="check-note">One sentence, one paragraph, one full page</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Goodreads + StoryGraph listings live</strong><span class="check-note">Mark as "Want to Read" to seed discovery before launch</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Email welcome sequence written (3 emails minimum)</strong><span class="check-note">Welcome, BSV explainer, launch week preview</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>BSV ordinals minted, burn mechanic tested end-to-end</strong><span class="check-note">Edition cap set. Test it yourself before you announce it.</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Press kit PDF complete</strong><span class="check-note">Synopsis, bio, cover art, logline, BSV info, contact, photo</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>30 influencers researched and listed in a spreadsheet</strong><span class="check-note">Ready for DM outreach starting May 12</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Press releases sent (3 versions) by May 19</strong><span class="check-note">Local, literary, BSV/tech — personalize the first paragraph for each outlet</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>30-second teaser video filmed and edited</strong><span class="check-note">CapCut is free and excellent for the atmospheric aesthetic you need</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>All 5 pre-written launch captions ready and scheduled</strong><span class="check-note">Use Buffer or Later to schedule May 26 posts ahead of time. Do not post manually under pressure.</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>"Tomorrow." post scheduled May 25 for 9 AM</strong><span class="check-note">Handwritten note, first sentence, your hand in frame. Most human post of the campaign.</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Launch day posts scheduled: 9 AM, 12 PM, 3 PM, 6 PM</strong><span class="check-note">Prepare these in advance. Launch day is not the day to be writing copy.</span></div>
+    </li>
+    <li>
+      <div class="check-box">□</div>
+      <div class="check-body"><strong>Someone you trust ready to be with you on May 26</strong><span class="check-note">You need a human in the room. This is real. Don't do it alone.</span></div>
+    </li>
+  </ul>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-title">We're Naked! — A Rapture in Three Acts</div>
+  <div class="footer-sub">ChefMyKLove · Nanaimo BC · Tuesday, May 26, 2026 · 9:00 AM PDT</div>
+  <div class="footer-mantra">"Some things are more beautiful when they can't be replicated."</div>
+</div>
+
+</body>
+</html>

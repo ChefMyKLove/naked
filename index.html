@@ -50,6 +50,7 @@ body::after {
   position: relative;
   text-align: center;
   overflow: hidden;
+  z-index: 2;
 }
 
 .hero-bg {
@@ -190,6 +191,8 @@ h1 em {
   margin: 0 auto;
   padding: 120px 40px;
   border-top: 1px solid rgba(196,168,130,0.1);
+  position: relative;
+  z-index: 2;
 }
 
 .section-label {
@@ -522,6 +525,8 @@ footer {
   border-top: 1px solid rgba(196,168,130,0.1);
   padding: 48px 40px;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-inner {
@@ -852,9 +857,104 @@ footer {
   .modal-box { padding: 32px 24px; }
 }
 
+/* ── DUST MOTES ── */
+#dust-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── QUOTES CAROUSEL ── */
+.quotes-section {
+  padding: 100px 40px;
+  border-top: 1px solid rgba(196,168,130,0.1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.quotes-inner { max-width: 700px; margin: 0 auto; }
+
+.quotes-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 56px;
+}
+
+.quote-track {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.quote-slide {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  border: none;
+  margin: 0;
+}
+
+.quote-slide.active { opacity: 1; }
+
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3em;
+  color: rgba(184,150,90,0.2);
+  line-height: 0.6;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--dust);
+  line-height: 1.85;
+  max-width: 560px;
+}
+
+.quote-dots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.quote-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(138,122,106,0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.quote-dot.active {
+  background: var(--gold);
+  transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+  .quotes-section { padding: 70px 24px; }
+}
+
 </style>
 </head>
 <body>
+
+<canvas id="dust-bg"></canvas>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -873,6 +973,54 @@ footer {
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     <span>scroll</span>
+  </div>
+</section>
+
+<!-- ── QUOTES ── -->
+<section class="quotes-section">
+  <div class="quotes-inner reveal">
+    <p class="quotes-eyebrow">From the Story</p>
+    <div class="quote-track" id="quote-track">
+
+      <blockquote class="quote-slide active">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">The things that we cherish over a lifetime become as fleeting as a moment in Love. Or the breaths that Lovers breathe together.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Like being held by something so vast and indifferent and somehow still SO Loving. Like the universe&rsquo;s way of saying &lsquo;Welcome home&rsquo;.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">We&rsquo;re all walking around with a future of apocalypse dust on our skin and calling it just another Tuesday.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">It was very peaceful&hellip; like your hand on my face waking me up just now. Welcoming me home.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">It&rsquo;s been forever since that dream and you&rsquo;re the only one I ever wanted to share it with.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">There was no panic in the scene at all. We knew that this was exactly why we were all here&hellip; we were ready. We were together.</p>
+      </blockquote>
+
+    </div>
+    <div class="quote-dots" id="quote-dots">
+      <button class="quote-dot active" data-index="0" aria-label="Quote 1"></button>
+      <button class="quote-dot" data-index="1" aria-label="Quote 2"></button>
+      <button class="quote-dot" data-index="2" aria-label="Quote 3"></button>
+      <button class="quote-dot" data-index="3" aria-label="Quote 4"></button>
+      <button class="quote-dot" data-index="4" aria-label="Quote 5"></button>
+      <button class="quote-dot" data-index="5" aria-label="Quote 6"></button>
+    </div>
   </div>
 </section>
 
@@ -1153,6 +1301,97 @@ footer {
     </div>
   </div>
 </footer>
+
+<script>
+// ── Dust motes ──
+(function() {
+  const canvas = document.getElementById('dust-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, motes = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function makeMote(init) {
+    const m = {};
+    function reset(fromBottom) {
+      m.x = Math.random() * W;
+      m.y = fromBottom ? H + 5 : Math.random() * H;
+      m.r       = 0.3 + Math.random() * 0.85;
+      m.vx      = (Math.random() - 0.5) * 0.12;
+      m.vy      = -(0.03 + Math.random() * 0.13);
+      m.maxA    = 0.04 + Math.random() * 0.11;
+      m.a       = fromBottom ? 0 : Math.random() * m.maxA;
+      m.sin     = Math.random() * Math.PI * 2;
+      m.sinAmp  = 0.15 + Math.random() * 0.45;
+      m.sinFreq = 0.005 + Math.random() * 0.009;
+      m.warm    = Math.random();
+    }
+    reset(!init);
+    m.update = function() {
+      m.sin += m.sinFreq;
+      m.x += m.vx + Math.sin(m.sin) * m.sinAmp * 0.02;
+      m.y += m.vy;
+      if (m.a < m.maxA) m.a = Math.min(m.a + 0.0008, m.maxA);
+      if (m.y < -4) reset(true);
+    };
+    m.draw = function() {
+      if (m.a < 0.004) return;
+      const r = Math.round(195 + m.warm * 35);
+      const g = Math.round(168 + m.warm * 22);
+      const b = Math.round(128 + m.warm * 15);
+      ctx.globalAlpha = m.a;
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    };
+    return m;
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    motes.forEach(m => { m.update(); m.draw(); });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  for (let i = 0; i < 65; i++) motes.push(makeMote(true));
+  window.addEventListener('resize', resize);
+  loop();
+})();
+
+// ── Quote carousel ──
+(function() {
+  const slides = Array.from(document.querySelectorAll('.quote-slide'));
+  const dots   = Array.from(document.querySelectorAll('.quote-dot'));
+  let current  = 0, timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = ((i % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 6000);
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    goTo(parseInt(d.dataset.index, 10));
+    start();
+  }));
+
+  start();
+})();
+</script>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>

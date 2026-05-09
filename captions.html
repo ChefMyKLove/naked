@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We're Naked! — Caption Library</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0b0e;
+  --surface: #141018;
+  --lift: #1c1622;
+  --ember: #c4593a;
+  --gold: #c9a84c;
+  --violet: #7c5c99;
+  --bone: #e6ddd4;
+  --mist: #7a7280;
+  --pale: #f0ebe5;
+  --pride: #e07c3a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--bone);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* HEADER */
+header {
+  padding: 72px 48px 56px;
+  border-bottom: 1px solid rgba(196,89,58,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 90%, rgba(124,92,153,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, rgba(196,89,58,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.header-label {
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 20px;
+  display: block;
+}
+
+header h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--bone);
+  line-height: 1.05;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+header h1 em {
+  color: var(--ember);
+  font-style: normal;
+}
+
+.header-sub {
+  font-size: 10px;
+  color: var(--mist);
+  letter-spacing: 0.2em;
+  position: relative;
+}
+
+.header-note {
+  margin-top: 28px;
+  padding: 16px 20px;
+  background: rgba(201,168,76,0.07);
+  border-left: 2px solid var(--gold);
+  font-size: 12px;
+  color: rgba(230,221,212,0.7);
+  font-style: italic;
+  max-width: 680px;
+  position: relative;
+}
+
+/* FILTER NAV */
+.filter-nav {
+  background: var(--surface);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 0 48px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.filter-nav a {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  text-decoration: none;
+  padding: 15px 18px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.filter-nav a:hover { color: var(--bone); border-bottom-color: var(--ember); }
+
+/* MAIN */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+/* PHASE DIVIDER */
+.phase {
+  margin: 64px 0 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.phase-num {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+}
+
+.phase-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--bone);
+  font-weight: 400;
+}
+
+.phase-dates {
+  font-size: 9px;
+  color: var(--mist);
+  letter-spacing: 0.15em;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* POST CARD */
+.post-card {
+  margin: 32px 0;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.post-header {
+  padding: 14px 20px;
+  background: var(--lift);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.post-date {
+  font-size: 10px;
+  color: var(--ember);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.post-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--bone);
+  flex: 1;
+}
+
+.platform-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ptag {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--mist);
+}
+
+.ptag.ig { border-color: rgba(196,89,58,0.4); color: var(--ember); }
+.ptag.tk { border-color: rgba(124,92,153,0.4); color: var(--violet); }
+.ptag.x { border-color: rgba(201,168,76,0.3); color: var(--gold); }
+.ptag.th { border-color: rgba(122,114,128,0.4); color: var(--mist); }
+.ptag.all { border-color: rgba(230,221,212,0.2); color: var(--bone); }
+.ptag.pride { border-color: rgba(224,124,58,0.4); color: var(--pride); }
+
+.post-body {
+  padding: 24px 24px 8px;
+}
+
+/* CAPTION BLOCK */
+.caption-block {
+  margin-bottom: 20px;
+}
+
+.caption-label {
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.caption-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.05);
+}
+
+.caption-text {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--pale);
+  line-height: 1.85;
+  white-space: pre-wrap;
+  padding: 16px 20px;
+  background: rgba(0,0,0,0.2);
+  border-left: 2px solid rgba(196,89,58,0.3);
+  position: relative;
+}
+
+.caption-text.variant-b {
+  border-left-color: rgba(124,92,153,0.4);
+  margin-top: 8px;
+}
+
+.variant-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.hashtags {
+  margin-top: 14px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.02);
+  font-size: 11px;
+  color: rgba(124,92,153,0.8);
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+.copy-hint {
+  font-size: 9px;
+  color: rgba(122,114,128,0.5);
+  padding: 6px 0 16px 20px;
+  letter-spacing: 0.1em;
+}
+
+/* NOTES */
+.post-note {
+  padding: 12px 24px 20px;
+  font-size: 11px;
+  color: var(--mist);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.post-note strong { color: rgba(201,168,76,0.8); font-style: normal; }
+
+/* SPECIAL CARDS */
+.post-card.pride-card {
+  border-color: rgba(224,124,58,0.2);
+}
+
+.post-card.pride-card .post-header {
+  background: rgba(224,124,58,0.07);
+}
+
+.post-card.launch-card {
+  border-color: rgba(201,168,76,0.25);
+  box-shadow: 0 0 40px rgba(201,168,76,0.05);
+}
+
+.post-card.launch-card .post-header {
+  background: rgba(201,168,76,0.08);
+}
+
+/* SECTION DIVIDER */
+.section-break {
+  margin: 48px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-break span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(122,114,128,0.5);
+  white-space: nowrap;
+}
+
+.section-break::before,
+.section-break::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.04);
+}
+
+/* EMAIL BLOCK */
+.email-block {
+  background: var(--pale);
+  color: #1a1015;
+  padding: 36px 40px;
+  margin: 20px 0;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.email-subject {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(26,16,21,0.4);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.email-subject-line {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1015;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.email-block p { color: #1a1015; margin-bottom: 16px; font-size: 1rem; }
+
+.email-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 24px;
+  background: #1a1015;
+  color: var(--pale);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* LIVE SCRIPT */
+.live-script {
+  margin: 16px 0;
+  padding: 20px 24px;
+  background: rgba(124,92,153,0.08);
+  border: 1px solid rgba(124,92,153,0.15);
+}
+
+.live-line {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(124,92,153,0.08);
+  font-size: 13px;
+  color: rgba(230,221,212,0.8);
+}
+
+.live-line:last-child { border-bottom: none; }
+
+.live-line .speaker {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--violet);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--surface);
+  border-top: 1px solid rgba(196,89,58,0.15);
+  padding: 48px;
+  text-align: center;
+}
+
+footer .f-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: rgba(230,221,212,0.5);
+  margin-bottom: 8px;
+}
+
+footer .f-date {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--ember);
+  text-transform: uppercase;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--ember); }
+
+@media (max-width: 600px) {
+  header, main { padding-left: 24px; padding-right: 24px; }
+  .filter-nav { padding: 0 24px; }
+  header { padding-top: 48px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-label">Caption Library · Complete Campaign Copy</span>
+  <h1>We're <em>Naked!</em><br>A Rapture in Three Acts</h1>
+  <div class="header-sub">ChefMyKLove · May 4–June 2 · All Platforms</div>
+  <div class="header-note">
+    Voice: Poetic. Lyrical. Dreamy with a dry undercurrent. Occasionally profane, always precise. The work is the focus — atmosphere over face. These captions are written to sound like you, not like a launch campaign. Use them as written or bend them. They're yours.
+  </div>
+</header>
+
+<nav class="filter-nav">
+  <a href="#phase0">Foundation</a>
+  <a href="#phase1">Soft Launch</a>
+  <a href="#phase2">Build</a>
+  <a href="#phase3">Countdown</a>
+  <a href="#launchday">Launch Day</a>
+  <a href="#email">Emails</a>
+  <a href="#live">Live Scripts</a>
+  <a href="#sustain">Post-Launch</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PHASE 0: FOUNDATION -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="phase0">
+  <span class="phase-num">Phase Zero</span>
+  <span class="phase-title">Foundation Posts</span>
+  <span class="phase-dates">May 4–11</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 4–11</span>
+    <span class="post-name">Profile Bio Update — All Platforms</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Instagram / Threads Bio</div>
+      <div class="caption-text">Writer. Dreamer. Occasional disaster.
+We're Naked! — A Rapture in Three Acts
+Out May 26. ↓</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">X / Twitter Bio</div>
+      <div class="caption-text">I wrote a love story that takes place inside a dream inside a dream. It comes out May 26. Everything else is secondary.</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">TikTok Bio</div>
+      <div class="caption-text">ChefMyKLove | author | We're Naked! out May 26 | link below</div>
+    </div>
+  </div>
+  <div class="post-note">Keep bios minimal. The mystery is the point. Don't over-explain before you've started.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PHASE 1: SOFT LAUNCH -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="phase1">
+  <span class="phase-num">Phase One</span>
+  <span class="phase-title">Soft Launch — Build Intrigue</span>
+  <span class="phase-dates">May 12–15</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 12 · 9 AM</span>
+    <span class="post-name">The First Post — Cropped Cover Tease</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag th">Threads</span><span class="ptag x">X</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Primary Caption · Instagram + Threads</div>
+      <div class="caption-text">Something is ending.
+Something is beginning.
+
+May 26.</div>
+    </div>
+    <div class="hashtags">#WeAreNaked #LiteraryFiction #IndieAuthor #BookTok #ApocalypticRomance #Dreamscapes #QueerLit #NanaimoBC #ShortStory #ComingSoon</div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">X Version · 9 AM</div>
+      <div class="caption-text">Something is ending. Something is beginning.
+
+May 26. #WeAreNaked</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">X Reply to Your Own Tweet · 2 PM Same Day</div>
+      <div class="caption-text">The things we cherish over a lifetime become as fleeting as a moment in Love.</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Visual:</strong> Your cover, heavily cropped — a fragment only. No title visible. Let people wonder what they're looking at. The 2 PM reply on X is its own small detonation — drop the line with zero context and walk away.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 13 · 9 AM</span>
+    <span class="post-name">Behind the Creation</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag tk">TikTok</span><span class="ptag th">Threads</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Instagram / Threads Caption</div>
+      <div class="caption-text">I wrote this story the way you fall into a dream —
+not quite knowing when it started.
+
+It cost me something to finish it.
+I'm not entirely sure what.
+
+May 26. Something arrives.</div>
+    </div>
+    <div class="hashtags">#WeAreNaked #Writing #IndieAuthor #LiteraryFiction #ShortStory #Dreamcore #NanaimoBC</div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">TikTok Voiceover Script (30 sec, atmospheric footage)</div>
+      <div class="caption-text">I wrote a love story.
+
+Not the kind where love saves anyone. The kind where two people are so deep inside a dream together that waking up would be the cruelest thing imaginable.
+
+I finished it. It's real now. That's terrifying.
+
+May 26. We're Naked! — A Rapture in Three Acts.
+
+I think you might need to read it.</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Visual:</strong> Workspace, hands, manuscript pages, morning light — atmosphere only. No face required. The TikTok should feel like a confession, not a promo.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 14 · 9 AM</span>
+    <span class="post-name">The BSV Ordinal Tease</span>
+    <div class="platform-tags"><span class="ptag x">X</span><span class="ptag th">Threads</span><span class="ptag ig">IG</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">X / Threads Primary</div>
+      <div class="caption-text">My story exists in four forms.
+
+A $5 donation that sends half to Nanaimo Pride Society — and gives you the full interactive online version.
+
+A $2.99 download.
+
+A $100 HTML ordinal inscribed on the BSV blockchain. Limited edition. Collectible.
+
+And a physical signed copy you can only get by burning your ordinal. Yes. Burning it.
+
+Some things are more beautiful when they can't be replicated.
+
+May 26. We're Naked! — A Rapture in Three Acts.
+
+#BSV #BitcoinSV #IndiePublishing #NanaimoPride #WeAreNaked</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">Instagram Version (shorter)</div>
+      <div class="caption-text">Four ways to hold this story.
+
+$5 — interactive online edition. Half goes to Nanaimo Pride Society.
+$2.99 — digital download.
+$100 — HTML ordinal on the BSV blockchain.
+$0 extra — burn your ordinal. Receive the only physical copy that will ever exist from yours.
+
+Some things only exist once.
+
+May 26. Link in bio.
+
+#WeAreNaked #BSV #NanaimoPride #IndieAuthor #LiteraryFiction</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Note:</strong> The burn mechanic is genuinely novel. Post this with confidence — you're not explaining something complicated, you're inviting people into a ritual. Let it feel strange and beautiful, because it is.</div>
+</div>
+
+<div class="post-card pride-card">
+  <div class="post-header">
+    <span class="post-date">May 15 · 9 AM</span>
+    <span class="post-name">The Mood Board / Vibes Post</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag tk">TikTok</span><span class="ptag pride">Pride Angle</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Instagram Carousel Caption</div>
+      <div class="caption-text">Like we were having a little mini communion
+with the dreamscape aether.
+
+That's the feeling.
+
+May 26. We're Naked! — A Rapture in Three Acts.
+
+$5 minimum · interactive edition · half to Nanaimo Pride Society
+$2.99 · digital download
+$100 · BSV ordinal · limited
+
+Link in bio.
+
+#WeAreNaked #Dreamcore #LiteraryFiction #QueerLit #NanaimoPride #Atmospheric #BookTok #IndieAuthor #NanaimoBC</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">TikTok Version — Text on Screen Over Footage</div>
+      <div class="caption-text">[On screen, slow dissolve between images:]
+
+"the dreamscape aether"
+
+"a rapture in three acts"
+
+"May 26"
+
+[Voiceover or silence — let the images do the work]</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Visual direction:</strong> Fog on water. Bare skin in rain. A candle burning in a dark room. Two figures almost touching. Dream logic, not romance cliché. Pull from Pinterest boards tagged dreamcore, liminal spaces, surrealist photography.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PHASE 2: BUILD THE WAVE -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="phase2">
+  <span class="phase-num">Phase Two</span>
+  <span class="phase-title">Build the Wave</span>
+  <span class="phase-dates">May 16–22</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 16</span>
+    <span class="post-name">The Excerpt Drop</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Instagram / Threads — Text on Image Post</div>
+      <div class="caption-text">The things we cherish over a lifetime
+become as fleeting as a moment in Love.
+
+Or the breaths that Lovers breathe together.
+
+— We're Naked! A Rapture in Three Acts
+Out May 26.
+
+#WeAreNaked #LiteraryFiction #Excerpt #BookTok #IndieAuthor</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">TikTok — Read It Aloud Version</div>
+      <div class="caption-text">[Slow. Let each line land. Silence after.]
+
+"The things we cherish over a lifetime
+become as fleeting as a moment in Love.
+
+Or the breaths that Lovers breathe together."
+
+[pause]
+
+That's a line from the story I'm releasing May 26.
+
+It's called We're Naked! — A Rapture in Three Acts.
+
+It'll cost you $2.99. Or $5 if you want to send half of that to Nanaimo Pride.
+
+[no call to action beyond that. just let it sit.]</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">X Thread Version</div>
+      <div class="caption-text">Thread: lines from a story about dreaming.
+
+1/ "The things we cherish over a lifetime become as fleeting as a moment in Love."
+
+2/ "Like we were having a little mini communion with the dreamscape aether."
+
+3/ The story is called We're Naked! — A Rapture in Three Acts. It drops May 26.
+
+4/ It's about a dream being told to a lover in what could well be a dream. Make of that what you will.
+
+#WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>This is your highest-shareability post of Phase Two.</strong> Literary readers share lines that wreck them. Post and then walk away — don't add more context. The lines are enough. Trust them.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 17</span>
+    <span class="post-name">The "Why I Wrote This"</span>
+    <div class="platform-tags"><span class="ptag ig">IG Reel</span><span class="ptag tk">TikTok</span><span class="ptag th">Threads</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">60-Second Voiceover Script — Atmospheric Footage</div>
+      <div class="caption-text">I've been trying to figure out how to describe this story and I keep arriving at the same problem:
+
+it takes place inside a dream.
+And it's being told to a lover.
+Who might also be inside the dream.
+
+So. You know. Normal stuff.
+
+What I can tell you is that it's about the way Love makes time do something strange. How a whole life can compress into a single breath. How a single breath can contain everything.
+
+It's called We're Naked! — A Rapture in Three Acts.
+
+It's out May 26.
+
+I'm a little terrified.
+You're welcome.</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">Caption for the Post</div>
+      <div class="caption-text">I wrote a story that takes place inside a dream being told to a lover who might also be inside the dream.
+
+Completely normal. Very fine. Not at all the kind of thing that kept me up.
+
+May 26. We're Naked! — A Rapture in Three Acts. Link in bio.
+
+#WeAreNaked #IndieAuthor #LiteraryFiction #Dreamcore #BookTok #NanaimoBC</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>This is where your dry humour lives.</strong> The script leans into the absurdity of the concept with affection — "so, you know, normal stuff" lands because it's self-aware without being self-deprecating. The terror at the end is real. Keep it.</div>
+</div>
+
+<div class="post-card pride-card">
+  <div class="post-header">
+    <span class="post-date">May 18</span>
+    <span class="post-name">The Nanaimo Pride Post</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag th">Threads</span><span class="ptag x">X</span><span class="ptag pride">Pride</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Primary Caption — All Platforms</div>
+      <div class="caption-text">Art and community aren't separate things.
+They never were.
+
+For $5 — the price of a coffee that'll be gone in four minutes — you get the full interactive online version of We're Naked! And half of that goes directly to Nanaimo Pride Society.
+
+Every edition of this story is something. But this one is a little communion of its own.
+
+May 26. Link in bio.
+
+@NanaimoPride [tag them]
+
+#NanaimoPride #WeAreNaked #QueerLit #NanaimoBC #IndieAuthor #GiveBack #LiteraryFiction #Pride2026</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">Shorter X Version</div>
+      <div class="caption-text">$5 gets you the full interactive version of my story. Half goes to @NanaimoPride.
+
+Art and community aren't separate things.
+
+May 26. We're Naked! — A Rapture in Three Acts.
+
+#NanaimoPride #WeAreNaked #QueerLit</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Tag Nanaimo Pride Society directly</strong> on every platform. Ask them to reshare. The "little communion" phrasing mirrors your own line from the story — it's intentional. This post should feel like an extension of the work, not marketing copy layered on top of it.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 19</span>
+    <span class="post-name">The "Not For Everyone" Hook</span>
+    <div class="platform-tags"><span class="ptag tk">TikTok</span><span class="ptag ig">IG Reel</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">TikTok / Reel Script — Straight to Camera or Voiceover</div>
+      <div class="caption-text">This story is not for you —
+
+if you need a love story that ends cleanly.
+If you need to know what was real and what was dreamed.
+If you need someone to survive it.
+
+It is absolutely for you —
+
+if you've ever loved someone so much that being near them felt like standing inside something sacred and catastrophic at the same time.
+
+If you've ever had a dream so beautiful that waking felt like a small kind of dying.
+
+It's called We're Naked! — A Rapture in Three Acts.
+It drops May 26.
+$2.99. Or $5 with half to Nanaimo Pride.
+
+Link in bio. If you're still here.</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">Caption</div>
+      <div class="caption-text">Not for everyone. Absolutely for someone.
+
+May 26. We're Naked! — A Rapture in Three Acts. Link in bio.
+
+#WeAreNaked #DarkRomance #LiteraryFiction #BookTok #Dreamcore #IndieAuthor #QueerLit #ApocalypticRomance</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Deliver the "not for you" section with confidence, not apology.</strong> The list of who it IS for should land like recognition — people should feel seen, not sold to. Pause before "Link in bio. If you're still here." That last line is the dry humour doing its work.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 20</span>
+    <span class="post-name">The BSV/Crypto Community Post</span>
+    <div class="platform-tags"><span class="ptag x">X</span><span class="ptag th">Threads</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">X Thread</div>
+      <div class="caption-text">I minted a short story on BSV. Here's how it works and why I did it. Thread 🧵
+
+1/ The story is called We're Naked! — A Rapture in Three Acts. It's a surreal love story that takes place inside a dream. It drops May 26.
+
+2/ There are 4 editions. The one I want to talk about: a $100 HTML ordinal inscribed on the BSV blockchain. Limited to 100 copies.
+
+3/ But here's the part that matters: buy the ordinal, and you can choose to burn it. Permanently. In exchange for the only physical signed copy that will ever exist from that token.
+
+4/ The number of physical copies in the world is determined entirely by how many people choose to burn. There is no reprint. No second run. What gets burned becomes irreplaceable.
+
+5/ I chose BSV because the story is about impermanence. About Love that exists in one unrepeatable moment. The burn mechanic isn't decoration. It's the same logic as the story.
+
+6/ Mint transaction: [your link]
+
+If you're in the BSV or ordinals space and this resonates — I'd love to hear from you.
+
+#BSV #BitcoinSV #Ordinals #DigitalCollectibles #IndiePublishing #WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>This thread is for a completely different audience than BookTok.</strong> Write it like you're explaining something genuinely interesting to curious people — not pitching. The thematic connection between the burn mechanic and the story's themes about impermanence is your strongest argument. Use it.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 21</span>
+    <span class="post-name">Comment Bait — Engagement Post</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag th">Threads</span><span class="ptag x">X</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Option A — The Rapture Question</div>
+      <div class="caption-text">My story is called A Rapture in Three Acts.
+
+What's the last thing that felt like a kind of rapture to you?
+
+(I'm writing this down. All of it.)
+
+#WeAreNaked #LiteraryFiction</div>
+    </div>
+    <div class="caption-block" style="margin-top: 16px;">
+      <div class="caption-label">Option B — The Dream Question</div>
+      <div class="caption-text">Honest question:
+
+When you wake from a dream that was more vivid than most of your days — do you mourn it?
+
+Asking for a story.
+
+#WeAreNaked</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">Option C — The Fleeting Question</div>
+      <div class="caption-text">Finish this sentence in the comments:
+
+"The things we cherish over a lifetime become as fleeting as ___."
+
+There's no wrong answer. I mean that.
+
+#WeAreNaked #LiteraryFiction #Writing</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Reply to every single comment.</strong> Ask a follow-up. These conversations are your algorithm signal AND your community. Option C uses your actual line from the story as the prompt — readers who comment are already inside the work before they've paid for it.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 22</span>
+    <span class="post-name">The FOMO / Limited Edition Urgency</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Primary Caption</div>
+      <div class="caption-text">The BSV ordinal edition of We're Naked! is limited to 100 copies.
+
+Once they're gone, the burn mechanic is gone with them. There is no reprint. The physical edition that emerges from a burn is the only one of its kind in existence.
+
+Some things only happen once.
+
+Four days.
+
+#WeAreNaked #BSV #LimitedEdition #IndiePublishing #CollectibleArt</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">X Short Version</div>
+      <div class="caption-text">The ordinal burn edition of We're Naked! is limited to 100.
+
+When they're gone, what they could become is gone too.
+
+Four days. #WeAreNaked #BSV</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PHASE 3: COUNTDOWN -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="phase3">
+  <span class="phase-num">Phase Three</span>
+  <span class="phase-title">Countdown</span>
+  <span class="phase-dates">May 23–25</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 23 · Saturday</span>
+    <span class="post-name">Full Cover Reveal</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">The Reveal Caption — All Platforms</div>
+      <div class="caption-text">Three days.
+
+#WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>That's the whole caption.</strong> The full cover art does the work. Two words and a hashtag. Resist the urge to add more. Pin this immediately to every profile. The restraint is the message.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 23 · Afternoon</span>
+    <span class="post-name">The Share Request</span>
+    <div class="platform-tags"><span class="ptag ig">IG Story</span><span class="ptag x">X</span><span class="ptag th">Threads</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Caption</div>
+      <div class="caption-text">If you know someone who reads with their whole chest — someone who needs a love story that doesn't pretend impermanence isn't the whole point —
+
+tag them here.
+
+That's all I'm asking.
+
+Three days. We're Naked! — A Rapture in Three Acts.
+
+#WeAreNaked #BookTok #LiteraryFiction</div>
+    </div>
+  </div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 24 · Sunday</span>
+    <span class="post-name">The Still Post — Pre-Live</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag th">Threads</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Sunday Stillness Caption</div>
+      <div class="caption-text">The breaths that Lovers breathe together.
+
+Two days.
+
+#WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Visual:</strong> One image. Something quiet — morning light, hands, water, smoke. The line from the story stands alone. No explanation. This post is about feeling, not information.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 24 · Evening</span>
+    <span class="post-name">Live Announcement Post</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag tk">TikTok</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Caption — Going Live Tonight</div>
+      <div class="caption-text">Going live in [X minutes / at X PM].
+
+I'm going to read you something.
+
+That's the whole plan. Come if you want.
+
+#WeAreNaked #Live #Reading</div>
+    </div>
+  </div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 25 · Monday</span>
+    <span class="post-name">Tomorrow. — The Final Pre-Launch Post</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">The Post — Handwritten Note, Photo of Your Hand</div>
+      <div class="caption-text">Tomorrow.
+
+#WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>This is the most important pre-launch post you'll make.</strong> A handwritten dedication line or the first sentence of the story on paper. Your hand holding it. That image. Two words. Pin it everywhere. The campaign has been building to this image for three weeks — let it land without decoration.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- LAUNCH DAY -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="launchday">
+  <span class="phase-num">May 26</span>
+  <span class="phase-title">Launch Day</span>
+  <span class="phase-dates">Every Hour</span>
+</div>
+
+<div class="post-card launch-card">
+  <div class="post-header">
+    <span class="post-date">9:00 AM PDT</span>
+    <span class="post-name">The Main Announcement — All Platforms</span>
+    <div class="platform-tags"><span class="ptag all">All Simultaneously</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Instagram / Threads — Full Caption</div>
+      <div class="caption-text">It's here.
+
+We're Naked! — A Rapture in Three Acts.
+
+A dream, being told to a lover, in what could well be a dream.
+Whimsical. Devastating. Sublime.
+
+Four ways to hold it:
+
+🌈 $5 minimum · interactive online edition · half to Nanaimo Pride Society
+📖 $2.99 · digital download
+🔗 $100 · HTML ordinal on the BSV blockchain · limited edition
+🔥 Burn your ordinal · receive the only physical copy that will ever exist from yours
+
+Link in bio.
+
+Thank you for being here for this.
+
+#WeAreNaked #ARaptureInThreeActs #LiteraryFiction #IndieAuthor #BookTok #NanaimoPride #QueerLit #BSV #Dreamcore #ApocalypticRomance #ShortStory #NanaimoBC #OutNow</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">X Version — 9 AM</div>
+      <div class="caption-text">We're Naked! — A Rapture in Three Acts is out now.
+
+A dream, told to a lover, in what could well be a dream.
+
+Four editions. $5 to $100. Half of the $5 tier goes to @NanaimoPride.
+
+[link]
+
+#WeAreNaked #LiteraryFiction #BSV #NanaimoPride</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Post these simultaneously across every platform at 9 AM PDT sharp.</strong> The emoji bullets in the Instagram version are intentional — they break up the edition tiers visually without being gratuitous. Do not post the TikTok now — that drops at 3 PM as its own separate moment.</div>
+</div>
+
+<div class="post-card launch-card">
+  <div class="post-header">
+    <span class="post-date">12:00 PM PDT</span>
+    <span class="post-name">X Midday Quote-Tweet</span>
+    <div class="platform-tags"><span class="ptag x">X</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Quote-Tweet Your Own Morning Post With This</div>
+      <div class="caption-text">The things we cherish over a lifetime become as fleeting as a moment in Love.
+
+Or the breaths that Lovers breathe together.
+
+Out now. [link] #WeAreNaked</div>
+    </div>
+  </div>
+</div>
+
+<div class="post-card launch-card">
+  <div class="post-header">
+    <span class="post-date">3:00 PM PDT</span>
+    <span class="post-name">TikTok Native Launch Reel</span>
+    <div class="platform-tags"><span class="ptag tk">TikTok Only</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">TikTok Script — 45–60 Seconds, Atmospheric, Voiceover</div>
+      <div class="caption-text">[Over slow, dreamy footage — fog, hands, candlelight, water]
+
+Voiceover:
+
+"The things we cherish over a lifetime
+become as fleeting as a moment in Love.
+
+Or the breaths that Lovers breathe together."
+
+[pause]
+
+That's a line from my story.
+
+It's called We're Naked! — A Rapture in Three Acts.
+
+It's about a dream being told to a lover in what could well be a dream.
+
+It came out today.
+
+For $5, half goes to Nanaimo Pride Society.
+For $2.99, it's yours.
+
+Link in bio.
+
+[let it breathe]</div>
+    </div>
+    <div class="caption-block" style="margin-top:16px;">
+      <div class="caption-label">TikTok Caption</div>
+      <div class="caption-text">out today. a love story inside a dream inside a love story. 💀
+
+link in bio · $2.99 · $5 with half to Nanaimo Pride
+
+#WeAreNaked #BookTok #LiteraryFiction #Dreamcore #IndieAuthor #QueerLit #NanaimoPride #ShortStory</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>The lowercase casual caption is intentional</strong> — it breaks the formality of the launch and feels native to TikTok. The skull emoji is dry humour doing its work. Do not over-explain the story. The excerpt line is the whole pitch.</div>
+</div>
+
+<div class="post-card launch-card">
+  <div class="post-header">
+    <span class="post-date">6:00 PM PDT</span>
+    <span class="post-name">Instagram Stories Sequence</span>
+    <div class="platform-tags"><span class="ptag ig">IG Stories</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">Story 1 of 5 — Text Only</div>
+      <div class="caption-text">It's out.</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">Story 2 of 5 — Cover Art</div>
+      <div class="caption-text">[Full cover image]</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">Story 3 of 5 — Link Sticker</div>
+      <div class="caption-text">Four editions. One story.
+[Link sticker to your Linktree]</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">Story 4 of 5 — Pride Callout</div>
+      <div class="caption-text">The $5 edition sends half to Nanaimo Pride.
+That one matters to me most.
+[link sticker]</div>
+    </div>
+    <div class="caption-block">
+      <div class="caption-label">Story 5 of 5 — Personal</div>
+      <div class="caption-text">[Short video, face or hands, no script]
+Just: thank you for being here.
+That's it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- EMAIL SEQUENCES -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="email">
+  <span class="phase-num">Email</span>
+  <span class="phase-title">Newsletter Copy</span>
+  <span class="phase-dates">3 Emails Total</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 9</span>
+    <span class="post-name">Email 1 — The First Touch</span>
+    <div class="platform-tags"><span class="ptag all">Newsletter</span></div>
+  </div>
+  <div class="post-body">
+    <div class="email-block">
+      <div class="email-subject">Subject Line:</div>
+      <div class="email-subject-line">I finished something I've been afraid to share.</div>
+      <p>Hello —</p>
+      <p>I wrote a story.</p>
+      <p>It takes place inside a dream being told to a lover in what could well be a dream. It's whimsical. It's devastating. It ends the only way it could end, which is the way all dreams end.</p>
+      <p>It's called We're Naked! — A Rapture in Three Acts.</p>
+      <p>It comes out May 26.</p>
+      <p>There will be four ways to read it — including one where $5 sends half to Nanaimo Pride Society, and one that involves the BSV blockchain and a burn mechanic I'll explain properly closer to launch.</p>
+      <p>For now I just wanted you to know it exists. That it's real. That I finished it.</p>
+      <p>More soon.</p>
+      <p style="margin-top:24px; font-style:italic;">— ChefMyKLove</p>
+      <p style="font-size:0.85rem; color:#555; margin-top:8px;">P.S. — If someone who loves strange, beautiful things forwarded this to you: hello. You can sign up here. [link]</p>
+    </div>
+  </div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 22</span>
+    <span class="post-name">Email 2 — Pre-Launch</span>
+    <div class="platform-tags"><span class="ptag all">Newsletter</span></div>
+  </div>
+  <div class="post-body">
+    <div class="email-block">
+      <div class="email-subject">Subject Line:</div>
+      <div class="email-subject-line">Four days. Here's everything you need to know.</div>
+      <p>Hello —</p>
+      <p>We're Naked! — A Rapture in Three Acts comes out May 26. Four days from now.</p>
+      <p>Here is what exists and what it costs:</p>
+      <p><strong>$5 minimum donation</strong> — the full interactive online version of the story. Half of everything from this edition goes to Nanaimo Pride Society. This one matters to me most.</p>
+      <p><strong>$2.99</strong> — the digital download. Yours forever. Read it at 2am in the dark.</p>
+      <p><strong>$100</strong> — a limited HTML ordinal inscribed on the BSV blockchain. Collectible. Strange. Beautiful.</p>
+      <p><strong>Burn the ordinal</strong> — permanently — and receive the only physical signed copy that will ever exist from yours. There is no reprint.</p>
+      <p>Here is a line from the story:</p>
+      <p style="padding: 16px 20px; border-left: 3px solid #c4593a; font-style: italic; color: #333; background: #f5f0ea;"><em>"Like we were having a little mini communion with the dreamscape aether."</em></p>
+      <p>Four days. I hope you'll be there.</p>
+      <p style="margin-top:24px; font-style:italic;">— ChefMyKLove</p>
+      <a href="#" class="email-cta">Pre-Save / Sign up for launch alerts →</a>
+    </div>
+  </div>
+</div>
+
+<div class="post-card launch-card">
+  <div class="post-header">
+    <span class="post-date">May 26 · 9:30 AM</span>
+    <span class="post-name">Email 3 — Launch Day Blast</span>
+    <div class="platform-tags"><span class="ptag all">Newsletter</span></div>
+  </div>
+  <div class="post-body">
+    <div class="email-block">
+      <div class="email-subject">Subject Line:</div>
+      <div class="email-subject-line">It's here. We're Naked! is live.</div>
+      <p>It's out.</p>
+      <p><em>We're Naked! — A Rapture in Three Acts</em> is available right now.</p>
+      <p>Start with the one that feels right for you:</p>
+      <p>🌈 <strong><a href="#">$5 · Interactive Edition</a></strong> — half to Nanaimo Pride Society<br>
+      📖 <strong><a href="#">$2.99 · Digital Download</a></strong><br>
+      🔗 <strong><a href="#">$100 · BSV Ordinal</a></strong> — limited, collectible, burnable</p>
+      <p>If you read it today — thank you. If you share it — thank you twice over. If you tell me what it did to you — I'll carry that.</p>
+      <p style="font-style:italic;">"The things we cherish over a lifetime become as fleeting as a moment in Love."</p>
+      <p style="margin-top:24px; font-style:italic;">— ChefMyKLove</p>
+      <a href="#" class="email-cta">Read We're Naked! now →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- LIVE SCRIPTS -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="live">
+  <span class="phase-num">Lives</span>
+  <span class="phase-title">Live Stream Scripts</span>
+  <span class="phase-dates">May 24 + May 26</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 24 · Pre-Launch Live</span>
+    <span class="post-name">Opening Script + Reading Plan</span>
+    <div class="platform-tags"><span class="ptag tk">TikTok Live</span><span class="ptag ig">IG Live</span></div>
+  </div>
+  <div class="post-body">
+    <div class="live-script">
+      <div class="live-line">
+        <span class="speaker">Open (first 60 seconds)</span>
+        "Hey — thank you for being here. Where are you watching from? Drop it in the comments." [pause, read comments, respond to a few] "Incredible. Okay."
+      </div>
+      <div class="live-line">
+        <span class="speaker">The Setup</span>
+        "So. I wrote a story. It comes out tomorrow. And I thought — instead of doing something sensible — I'd just read some of it to you. Live. Right now. Is that okay? [pause] Great. Here we go."
+      </div>
+      <div class="live-line">
+        <span class="speaker">The Reading</span>
+        [Read your opening passage. Slowly. Let silence exist. Don't rush to fill it.] [After you finish:] "Okay. That's — yeah. That's the beginning."
+      </div>
+      <div class="live-line">
+        <span class="speaker">Q&A Prompt</span>
+        "What did that feel like? Not what did it mean — what did it feel like? [read responses] What I can tell you is that this story is about [your one sentence]. And it comes out tomorrow. Tomorrow at 9 AM PDT."
+      </div>
+      <div class="live-line">
+        <span class="speaker">The Pride Moment</span>
+        "One thing I want to mention — the $5 edition. Half of everything from that tier goes directly to Nanaimo Pride Society. That's not a marketing thing. That's just — art and community aren't separate things. They never were."
+      </div>
+      <div class="live-line">
+        <span class="speaker">Close</span>
+        "The link is in my bio. Four editions, including one where you literally burn the digital copy to get a physical one, which — look, I know. But it makes sense. I promise it makes sense. See you tomorrow."
+      </div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Pin the purchase link before you go live.</strong> Clip the reading section immediately after — that clip is evergreen content and should go up as a Reel within 24 hours.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- POST-LAUNCH -->
+<!-- ═══════════════════════════════════════ -->
+<div class="phase" id="sustain">
+  <span class="phase-num">Post-Launch</span>
+  <span class="phase-title">Sustain the Momentum</span>
+  <span class="phase-dates">May 27 – June 2</span>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">May 27</span>
+    <span class="post-name">Day After — Reader Reactions</span>
+    <div class="platform-tags"><span class="ptag all">All</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">When You Get Your First Reader Response — Post It</div>
+      <div class="caption-text">Someone read it.
+
+[screenshot or quote, with permission]
+
+I don't have words for what this feels like.
+More where that came from: [link]
+
+#WeAreNaked</div>
+    </div>
+  </div>
+  <div class="post-note">One genuine reader reaction is worth more than any caption you write. Share every single one as a Story and, when they're especially strong, as a feed post. Ask permission first — most readers will say yes and feel honoured to be shared.</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <span class="post-date">June 2 · Monday</span>
+    <span class="post-name">Week One Reflections</span>
+    <div class="platform-tags"><span class="ptag ig">IG</span><span class="ptag th">Threads</span><span class="ptag x">X</span></div>
+  </div>
+  <div class="post-body">
+    <div class="caption-block">
+      <div class="caption-label">The Post-Launch Honest Post</div>
+      <div class="caption-text">One week ago We're Naked! came out.
+
+Here is what I was not prepared for: [something true and specific that happened]
+
+Here is what I knew but didn't fully understand until now: releasing something you made with your whole self into the world is its own kind of rapture. In all the senses of that word.
+
+The story is still available. So is the Pride edition. So are the ordinals.
+
+Thank you for being part of this week.
+
+[link in bio]
+
+#WeAreNaked #IndieAuthor #Reflection #LiteraryFiction</div>
+    </div>
+  </div>
+  <div class="post-note"><strong>Fill in the bracketed section with something genuinely true.</strong> This post should feel like a letter, not a recap. Vulnerability here consistently outperforms promotional content — don't skip it, and don't sanitize it.</div>
+</div>
+
+</main>
+
+<footer>
+  <div class="f-title">We're Naked! — A Rapture in Three Acts</div>
+  <div class="f-date">ChefMyKLove · Launch: Tuesday May 26, 2026 · 9:00 AM PDT</div>
+</footer>
+
+</body>
+</html>
