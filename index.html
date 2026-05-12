@@ -8,10 +8,10 @@
 <style>
 :root {
   --ink: #1a1410;
-  --dust: #c4a882;
-  --cream: #f0e8d8;
-  --warm: #e8dcc8;
-  --dim: #8a7a6a;
+  --dust: #d4bc96;
+  --cream: #f5ede0;
+  --warm: #f0e6d2;
+  --dim: #a09282;
   --gold: #b8965a;
   --ember: #c17a3a;
 }
@@ -27,6 +27,20 @@ body {
   font-size: 18px;
   line-height: 1.7;
   overflow-x: hidden;
+}
+
+/* ── VIGNETTE GLOW ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%,
+    transparent 35%,
+    rgba(196,168,130,0.06) 65%,
+    rgba(196,168,130,0.13) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
 }
 
 /* ── GRAIN OVERLAY ── */
@@ -1184,50 +1198,38 @@ footer {
   </div>
 </section>
 
-<!-- ── QUOTES ── -->
-<section class="quotes-section">
-  <div class="quotes-inner reveal">
-    <p class="quotes-eyebrow">From the Story</p>
-    <div class="quote-track" id="quote-track">
+<!-- ── WHAT PEOPLE ARE SAYING ── -->
+<section class="reactions-section">
+  <div class="reactions-inner reveal">
+    <p class="reactions-eyebrow">What People Are Saying</p>
+    <div class="reaction-track" id="reaction-track">
 
-      <blockquote class="quote-slide active">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">The things that we cherish over a lifetime become as fleeting as a moment in Love. Or the breaths that Lovers breathe together.</p>
+      <blockquote class="reaction-slide active">
+        <p class="reaction-text">Weaving poetry and introspection in a slice-of-life setting.</p>
+        <cite class="reaction-attribution">Soma Love</cite>
       </blockquote>
 
-      <blockquote class="quote-slide">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Like being held by something so vast and indifferent and somehow still SO Loving. Like the universe&rsquo;s way of saying &lsquo;Welcome home&rsquo;.</p>
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">&hellip;an original approach to the apocalypse, and a good read. &nbsp; I liked it.</p>
+        <cite class="reaction-attribution">John S. Hall</cite>
       </blockquote>
 
-      <blockquote class="quote-slide">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">We&rsquo;re all walking around with a future of apocalypse dust on our skin and calling it just another Tuesday.</p>
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">I&rsquo;ve thought about the ending every day since I read it. That&rsquo;s not something I say about very many things.</p>
+        <cite class="reaction-attribution">Early Reader</cite>
       </blockquote>
 
-      <blockquote class="quote-slide">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">It was very peaceful&hellip; like your hand on my face waking me up just now. Welcoming me home.</p>
-      </blockquote>
-
-      <blockquote class="quote-slide">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">It&rsquo;s been forever since that dream and you&rsquo;re the only one I ever wanted to share it with.</p>
-      </blockquote>
-
-      <blockquote class="quote-slide">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">There was no panic in the scene at all. We knew that this was exactly why we were all here&hellip; we were ready. We were together.</p>
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">It&rsquo;s rare to read something that feels this intimate. Like you weren&rsquo;t supposed to be there — but you&rsquo;re so glad you were.</p>
+        <cite class="reaction-attribution">Advance Reader</cite>
       </blockquote>
 
     </div>
-    <div class="quote-dots" id="quote-dots">
-      <button class="quote-dot active" data-index="0" aria-label="Quote 1"></button>
-      <button class="quote-dot" data-index="1" aria-label="Quote 2"></button>
-      <button class="quote-dot" data-index="2" aria-label="Quote 3"></button>
-      <button class="quote-dot" data-index="3" aria-label="Quote 4"></button>
-      <button class="quote-dot" data-index="4" aria-label="Quote 5"></button>
-      <button class="quote-dot" data-index="5" aria-label="Quote 6"></button>
+    <div class="reaction-dots" id="reaction-dots">
+      <button class="reaction-dot active" data-index="0" aria-label="Response 1"></button>
+      <button class="reaction-dot" data-index="1" aria-label="Response 2"></button>
+      <button class="reaction-dot" data-index="2" aria-label="Response 3"></button>
+      <button class="reaction-dot" data-index="3" aria-label="Response 4"></button>
     </div>
   </div>
 </section>
@@ -1305,38 +1307,50 @@ footer {
   </p>
 </section>
 
-<!-- ── WHAT PEOPLE ARE SAYING ── -->
-<section class="reactions-section">
-  <div class="reactions-inner reveal">
-    <p class="reactions-eyebrow">What People Are Saying</p>
-    <div class="reaction-track" id="reaction-track">
+<!-- ── QUOTES ── -->
+<section class="quotes-section">
+  <div class="quotes-inner reveal">
+    <p class="quotes-eyebrow">From the Story</p>
+    <div class="quote-track" id="quote-track">
 
-      <blockquote class="reaction-slide active">
-        <p class="reaction-text">Weaving poetry and introspection in a slice-of-life setting.</p>
-        <cite class="reaction-attribution">Soma Love</cite>
+      <blockquote class="quote-slide active">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">The things that we cherish over a lifetime become as fleeting as a moment in Love. Or the breaths that Lovers breathe together.</p>
       </blockquote>
 
-      <blockquote class="reaction-slide">
-        <p class="reaction-text">&hellip;an original approach to the apocalypse, and a good read. &nbsp; I liked it.</p>
-        <cite class="reaction-attribution">John S. Hall</cite>
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Like being held by something so vast and indifferent and somehow still SO Loving. Like the universe&rsquo;s way of saying &lsquo;Welcome home&rsquo;.</p>
       </blockquote>
 
-      <blockquote class="reaction-slide">
-        <p class="reaction-text">I&rsquo;ve thought about the ending every day since I read it. That&rsquo;s not something I say about very many things.</p>
-        <cite class="reaction-attribution">Early Reader</cite>
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">We&rsquo;re all walking around with a future of apocalypse dust on our skin and calling it just another Tuesday.</p>
       </blockquote>
 
-      <blockquote class="reaction-slide">
-        <p class="reaction-text">It&rsquo;s rare to read something that feels this intimate. Like you weren&rsquo;t supposed to be there — but you&rsquo;re so glad you were.</p>
-        <cite class="reaction-attribution">Advance Reader</cite>
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">It was very peaceful&hellip; like your hand on my face waking me up just now. Welcoming me home.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">It&rsquo;s been forever since that dream and you&rsquo;re the only one I ever wanted to share it with.</p>
+      </blockquote>
+
+      <blockquote class="quote-slide">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">There was no panic in the scene at all. We knew that this was exactly why we were all here&hellip; we were ready. We were together.</p>
       </blockquote>
 
     </div>
-    <div class="reaction-dots" id="reaction-dots">
-      <button class="reaction-dot active" data-index="0" aria-label="Response 1"></button>
-      <button class="reaction-dot" data-index="1" aria-label="Response 2"></button>
-      <button class="reaction-dot" data-index="2" aria-label="Response 3"></button>
-      <button class="reaction-dot" data-index="3" aria-label="Response 4"></button>
+    <div class="quote-dots" id="quote-dots">
+      <button class="quote-dot active" data-index="0" aria-label="Quote 1"></button>
+      <button class="quote-dot" data-index="1" aria-label="Quote 2"></button>
+      <button class="quote-dot" data-index="2" aria-label="Quote 3"></button>
+      <button class="quote-dot" data-index="3" aria-label="Quote 4"></button>
+      <button class="quote-dot" data-index="4" aria-label="Quote 5"></button>
+      <button class="quote-dot" data-index="5" aria-label="Quote 6"></button>
     </div>
   </div>
 </section>
