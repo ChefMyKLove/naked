@@ -618,24 +618,24 @@ footer {
 .online-pride-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 48px;
-  padding: 14px 20px;
+  padding: 16px 20px;
   border: 1px solid rgba(196,168,130,0.18);
   background: rgba(196,168,130,0.04);
 }
 
-.pride-flag {
-  display: flex;
-  height: 12px;
-  width: 48px;
-  border-radius: 2px;
-  overflow: hidden;
+.pride-logo-img {
+  height: 72px;
+  width: auto;
   flex-shrink: 0;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 6px rgba(200,150,220,0.18));
+  transition: opacity 0.3s ease;
 }
 
-.pride-flag span {
-  flex: 1;
+.pride-logo-img:hover {
+  opacity: 1;
 }
 
 .pride-text {
@@ -648,6 +648,20 @@ footer {
 .pride-text strong {
   color: var(--cream);
   font-weight: 400;
+}
+
+.split-pride-logo {
+  height: 60px;
+  width: auto;
+  opacity: 0.7;
+  margin-top: 18px;
+  display: block;
+  filter: drop-shadow(0 0 4px rgba(200,150,220,0.15));
+  transition: opacity 0.3s ease;
+}
+
+.split-pride-logo:hover {
+  opacity: 0.9;
 }
 
 .online-header {
@@ -1360,15 +1374,10 @@ footer {
   <div class="section-label">Special Online Edition</div>
 
   <div class="online-pride-bar reveal">
-    <div class="pride-flag">
-      <span style="background:#e40303"></span>
-      <span style="background:#ff8c00"></span>
-      <span style="background:#ffed00"></span>
-      <span style="background:#008026"></span>
-      <span style="background:#004dff"></span>
-      <span style="background:#750787"></span>
-    </div>
-    <p class="pride-text"><strong>50% of every donation</strong> goes directly to the Nanaimo Pride Society</p>
+    <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
+      <img class="pride-logo-img" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
+    </a>
+    <p class="pride-text"><strong>50% of every donation</strong> goes directly to <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'">Nanaimo Pride Society</a></p>
   </div>
 
   <div class="online-header reveal">
@@ -1385,9 +1394,12 @@ footer {
     <div class="split-half">
       <div class="split-pct">50%</div>
       <div class="split-label">
-        <strong>Nanaimo Pride Society</strong>
+        <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;font-weight:400;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'"><strong>Nanaimo Pride Society</strong></a>
         supporting 2SLGBTQ+ community on the island
       </div>
+      <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
+        <img class="split-pride-logo" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
+      </a>
     </div>
     <div class="split-half">
       <div class="split-pct">50%</div>
