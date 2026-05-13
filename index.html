@@ -1820,7 +1820,7 @@ reveals.forEach(el => observer.observe(el));
 const STRIPE_PK = 'pk_live_51TTU9mAoPd2thQRkgraEgG3fq6I2kBdMawxE6Iqs10wGa5G8fnjvnwqAEAf6cWIyJ9jfVUrH2dTHAGz2mfc7vTYk00kjSOhAXr';
 const PAYMENT_ENDPOINT = 'https://naked-production.up.railway.app/api/donate';
 
-let stripe, cardElement, selectedAmount = 5;
+let stripe, cardElement, selectedAmount = 5, stripeReady = false;
 
 const modal       = document.getElementById('donation-modal');
 const openBtn     = document.getElementById('open-donation-modal');
@@ -1867,9 +1867,12 @@ customInput.addEventListener('input', () => {
 });
 
 function updateSubmitLabel() {
-  if (selectedAmount) {
+  if (selectedAmount && stripeReady) {
     submitBtn.textContent = `Donate $${selectedAmount} & Read`;
     submitBtn.disabled = false;
+  } else if (!stripeReady) {
+    submitBtn.textContent = 'Loading…';
+    submitBtn.disabled = true;
   } else {
     submitBtn.textContent = 'Minimum $5';
     submitBtn.disabled = true;
@@ -1896,8 +1899,8 @@ function initStripe() {
   });
   cardElement.mount('#stripe-card-element');
   cardElement.on('ready', () => {
-    submitBtn.textContent = 'Donate $5 & Read';
-    submitBtn.disabled = false;
+    stripeReady = true;
+    updateSubmitLabel();
   });
 }
 
@@ -1927,8 +1930,9 @@ submitBtn.addEventListener('click', async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: Math.round(amount * 100), email, currency: 'cad' })
     });
-    if (!res.ok) throw new Error('Server error — please try again.');
-    const { clientSecret } = await res.json();
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Server error — please try again.');
+    const { clientSecret } = data;
 
     // 2. Confirm payment with Stripe
     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
