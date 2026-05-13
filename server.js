@@ -6,12 +6,15 @@ const { Resend } = require('resend');
 const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// CORS — set ALLOWED_ORIGINS in Railway vars to your production domain(s)
-// e.g. "https://naked.chefmyklove.com,https://chefmyklove.com"
-// Leave unset to allow all origins (fine for initial testing)
+// CORS — defaults to known production domains.
+// Override by setting ALLOWED_ORIGINS in Railway (comma-separated).
+const defaultOrigins = [
+  'https://naked.chefmyklove.com',
+  'https://chefmyklove.com'
+];
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
-  : true; // true = allow all
+  : defaultOrigins;
 
 app.use(cors({ origin: allowedOrigins }));
 
