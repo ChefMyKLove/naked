@@ -1,0 +1,20 @@
+# Press releases and documents
+press releaese we're naked/
+PressContact_MasterList.docx
+
+# Office document files
+*.docx
+*.odt
+*.pdf
+*.zip
+
+# LibreOffice/OpenOffice lock files
+.~lock.*#
+
+# QR code images (generated assets)
+qrchimpX*.png
+
+# Environment
+.env
+.env.local
+node_modules/
