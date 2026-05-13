@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { Resend } = require('resend');
 
 const app = express();
+const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // CORS — defaults to known production domains.
@@ -27,6 +27,7 @@ app.get('/', (_req, res) => res.json({ ok: true }));
 
 // ── Create PaymentIntent ──────────────────────────────────
 app.post('/api/donate', async (req, res) => {
+  if (!stripe) return res.status(503).json({ error: 'Payment service not configured.' });
   const { amount, email, currency = 'cad' } = req.body;
 
   if (!amount || amount < 500) {
@@ -49,6 +50,7 @@ app.post('/api/donate', async (req, res) => {
 
 // ── Stripe webhook — sends access-link email on success ───
 app.post('/api/webhook', async (req, res) => {
+  if (!stripe) return res.status(503).send('Webhook handler not configured.');
   const sig = req.headers['stripe-signature'];
   let event;
 
