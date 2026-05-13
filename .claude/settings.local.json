@@ -1,11 +1,17 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(Select-Object FullName)",
+      "Bash(curl -s https://naked-production.up.railway.app/)",
+      "Bash(curl -si -X OPTIONS https://naked-production.up.railway.app/api/donate -H \"Origin: https://naked.chefmyklove.com\" -H \"Access-Control-Request-Method: POST\")",
+      "Bash(curl -si https://naked-production.up.railway.app/)",
+      "Bash(node --check server.js)",
+      "Bash(node -e ' *)",
+      "Bash(npm install *)"
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "claude-flow"
-  ],
-  "permissions": {
-    "allow": [
-      "Bash(Select-Object FullName)"
-    ]
-  }
+  ]
 }
