@@ -1,10 +1,15 @@
+const crypto = require('crypto');
 const express = require('express');
 const cors = require('cors');
 const { Resend } = require('resend');
+const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const supabase = (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
+  ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
+  : null;
 
 // CORS — production domains are always allowed.
 // ALLOWED_ORIGINS env var (comma-separated) adds extras but never removes the defaults.
@@ -28,6 +33,21 @@ app.use(express.json());
 
 // ── Health check ──────────────────────────────────────────
 app.get('/', (_req, res) => res.json({ ok: true }));
+
+// ── Verify story access token ─────────────────────────────
+app.get('/api/verify', async (req, res) => {
+  const { token } = req.query;
+  if (!token) return res.json({ valid: false });
+  if (!supabase) return res.json({ valid: false, error: 'Database not configured.' });
+
+  const { data, error } = await supabase
+    .from('access_tokens')
+    .select('token')
+    .eq('token', token)
+    .maybeSingle();
+
+  res.json({ valid: !!data && !error });
+});
 
 // ── Create PaymentIntent ──────────────────────────────────
 app.post('/api/donate', async (req, res) => {
@@ -71,8 +91,18 @@ app.post('/api/webhook', async (req, res) => {
 
   if (event.type === 'payment_intent.succeeded') {
     const { email } = event.data.object.metadata;
-    const storyUrl = process.env.STORY_ACCESS_URL || 'https://naked.chefmyklove.com/read';
+    const baseUrl = process.env.STORY_ACCESS_URL || 'https://naked.chefmyklove.com/story';
     const fromEmail = process.env.FROM_EMAIL || 'hello@chefmyklove.com';
+
+    // Generate a unique access token and store it in Supabase
+    const accessToken = crypto.randomUUID();
+    if (supabase && email) {
+      const { error: dbErr } = await supabase
+        .from('access_tokens')
+        .insert({ token: accessToken, email });
+      if (dbErr) console.error('Supabase token insert error:', dbErr.message);
+    }
+    const storyUrl = `${baseUrl}?token=${accessToken}`;
 
     if (process.env.RESEND_API_KEY && email) {
       try {

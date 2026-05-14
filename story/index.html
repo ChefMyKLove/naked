@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We're Naked! A Rapture in Three Acts — ChefMyKLove</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --dust: #d4bc96;
+  --cream: #f5ede0;
+  --warm: #f0e6d2;
+  --dim: #a09282;
+  --gold: #b8965a;
+  --ember: #c17a3a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--warm);
+  font-family: 'Crimson Text', serif;
+  font-size: 20px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── AUTH GATE ── */
+#gate {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.gate-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 24px;
+}
+
+.gate-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.gate-message {
+  color: var(--dim);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05em;
+  max-width: 400px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.gate-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 150, 90, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.gate-link:hover { color: var(--dust); border-color: var(--dust); }
+
+/* Spinner */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(212, 188, 150, 0.15);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 24px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── STORY CONTENT ── */
+#story { display: none; }
+
+.story-header {
+  text-align: center;
+  padding: 80px 40px 60px;
+  border-bottom: 1px solid rgba(212, 188, 150, 0.15);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.byline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 32px;
+}
+
+.story-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  letter-spacing: -0.5px;
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.story-title em { font-style: italic; color: var(--dust); }
+
+.story-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1em;
+  color: var(--dim);
+  margin-top: 12px;
+}
+
+.story-body {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 64px 40px 120px;
+}
+
+.act-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 72px 0 32px;
+  text-align: center;
+}
+
+.act-heading:first-child { margin-top: 0; }
+
+.section-break {
+  text-align: center;
+  color: var(--dim);
+  margin: 48px 0;
+  letter-spacing: 8px;
+  font-size: 0.75em;
+}
+
+.story-body p { margin-bottom: 1.5em; color: var(--warm); }
+
+.story-body p:first-of-type::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.6em;
+  font-weight: 300;
+  line-height: 0.75;
+  float: left;
+  margin: 0.08em 0.08em 0 0;
+  color: var(--dust);
+}
+
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.35em;
+  line-height: 1.5;
+  color: var(--dust);
+  border-left: 2px solid var(--gold);
+  padding: 4px 0 4px 28px;
+  margin: 48px 0;
+}
+
+.story-footer {
+  text-align: center;
+  padding: 48px 40px 80px;
+  border-top: 1px solid rgba(212, 188, 150, 0.15);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.story-footer p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--dim);
+  font-size: 0.9em;
+  margin-bottom: 24px;
+}
+
+.back-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 150, 90, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.back-link:hover { color: var(--dust); border-color: var(--dust); }
+
+@media (max-width: 600px) {
+  .story-header { padding: 60px 24px 48px; }
+  .story-body { padding: 48px 24px 80px; }
+  .story-footer { padding: 40px 24px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── AUTH GATE (shown until token is validated) ── -->
+<div id="gate">
+  <div class="spinner" id="spinner"></div>
+  <p class="gate-label" id="gate-label">ChefMyKLove</p>
+  <h1 class="gate-title" id="gate-title">Verifying access…</h1>
+  <p class="gate-message" id="gate-message"></p>
+  <a class="gate-link" id="gate-link" href="/" style="display:none">Support the work →</a>
+</div>
+
+<!-- ── STORY (hidden until token validates) ── -->
+<div id="story">
+  <article>
+
+    <header class="story-header">
+      <p class="byline">ChefMyKLove</p>
+      <h1 class="story-title">We're <em>Naked!</em></h1>
+      <p class="story-subtitle">A Rapture in Three Acts</p>
+    </header>
+
+    <div class="story-body">
+
+      <!-- ═══════════════════════════════════════════
+           REPLACE EVERYTHING BELOW THIS LINE
+           with your actual story content.
+           Use .act-heading for act titles,
+           .section-break for scene breaks,
+           .pull-quote for emphasized lines.
+           ═══════════════════════════════════════════ -->
+
+      <p class="act-heading">Act One</p>
+
+      <p>Your story begins here. Replace this placeholder with your writing.</p>
+
+      <div class="section-break">· · ·</div>
+
+      <p>Continue Act One here.</p>
+
+      <blockquote class="pull-quote">A line that deserves to breathe on its own.</blockquote>
+
+
+      <p class="act-heading">Act Two</p>
+
+      <p>Act Two begins here.</p>
+
+
+      <p class="act-heading">Act Three</p>
+
+      <p>The final act.</p>
+
+      <!-- ═══════════════════════════════════════════
+           END OF STORY CONTENT
+           ═══════════════════════════════════════════ -->
+
+    </div>
+
+    <footer class="story-footer">
+      <p>— ChefMyKLove</p>
+      <a class="back-link" href="/">Support the work</a>
+    </footer>
+
+  </article>
+</div>
+
+<script>
+  const API = 'https://naked-production.up.railway.app';
+
+  const token = new URLSearchParams(window.location.search).get('token');
+
+  function showDenied() {
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('gate-title').textContent = 'Access required';
+    document.getElementById('gate-message').textContent =
+      'This story is available to donors. If you\'ve already donated, check your email for your personal access link.';
+    document.getElementById('gate-link').style.display = 'inline';
+  }
+
+  function showStory() {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('story').style.display = 'block';
+  }
+
+  if (!token) {
+    showDenied();
+  } else {
+    fetch(`${API}/api/verify?token=${encodeURIComponent(token)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.valid) {
+          showStory();
+        } else {
+          showDenied();
+        }
+      })
+      .catch(() => showDenied());
+  }
+</script>
+
+</body>
+</html>
