@@ -6,17 +6,21 @@ const app = express();
 const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-// CORS — defaults to known production domains.
-// Override by setting ALLOWED_ORIGINS in Railway (comma-separated).
+// CORS — production domains are always allowed.
+// ALLOWED_ORIGINS env var (comma-separated) adds extras but never removes the defaults.
 const defaultOrigins = [
   'https://naked.chefmyklove.com',
   'https://chefmyklove.com'
 ];
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
-  : defaultOrigins;
+const extraOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()).filter(Boolean)
+  : [];
+const allowedOrigins = [...new Set([...defaultOrigins, ...extraOrigins])];
+console.log('CORS allowed origins:', allowedOrigins);
 
-app.use(cors({ origin: allowedOrigins }));
+const corsOptions = { origin: allowedOrigins, optionsSuccessStatus: 200 };
+app.options('*', cors(corsOptions));   // explicit preflight handler for all routes
+app.use(cors(corsOptions));
 
 // Raw body required for Stripe webhook signature verification
 app.use('/api/webhook', express.raw({ type: 'application/json' }));
