@@ -2,14 +2,41 @@ const crypto = require('crypto');
 const express = require('express');
 const cors = require('cors');
 const { Resend } = require('resend');
-const { createClient } = require('@supabase/supabase-js');
+
+// Supabase REST helpers — no SDK, just fetch
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+function supabaseHeaders() {
+  return {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json'
+  };
+}
+
+async function insertToken(token, email) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/access_tokens`, {
+    method: 'POST',
+    headers: supabaseHeaders(),
+    body: JSON.stringify({ token, email })
+  });
+  if (!res.ok) throw new Error(`Supabase insert failed: ${await res.text()}`);
+}
+
+async function verifyToken(token) {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/access_tokens?token=eq.${encodeURIComponent(token)}&select=token`,
+    { headers: supabaseHeaders() }
+  );
+  if (!res.ok) return false;
+  const rows = await res.json();
+  return Array.isArray(rows) && rows.length > 0;
+}
 
 const app = express();
 const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-const supabase = (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
-  ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
-  : null;
 
 // CORS — production domains are always allowed.
 // ALLOWED_ORIGINS env var (comma-separated) adds extras but never removes the defaults.
@@ -38,15 +65,15 @@ app.get('/', (_req, res) => res.json({ ok: true }));
 app.get('/api/verify', async (req, res) => {
   const { token } = req.query;
   if (!token) return res.json({ valid: false });
-  if (!supabase) return res.json({ valid: false, error: 'Database not configured.' });
+  if (!SUPABASE_URL || !SUPABASE_KEY) return res.json({ valid: false, error: 'Database not configured.' });
 
-  const { data, error } = await supabase
-    .from('access_tokens')
-    .select('token')
-    .eq('token', token)
-    .maybeSingle();
-
-  res.json({ valid: !!data && !error });
+  try {
+    const valid = await verifyToken(token);
+    res.json({ valid });
+  } catch (err) {
+    console.error('Verify error:', err.message);
+    res.json({ valid: false });
+  }
 });
 
 // ── Create PaymentIntent ──────────────────────────────────
@@ -96,11 +123,12 @@ app.post('/api/webhook', async (req, res) => {
 
     // Generate a unique access token and store it in Supabase
     const accessToken = crypto.randomUUID();
-    if (supabase && email) {
-      const { error: dbErr } = await supabase
-        .from('access_tokens')
-        .insert({ token: accessToken, email });
-      if (dbErr) console.error('Supabase token insert error:', dbErr.message);
+    if (SUPABASE_URL && SUPABASE_KEY && email) {
+      try {
+        await insertToken(accessToken, email);
+      } catch (err) {
+        console.error('Supabase token insert error:', err.message);
+      }
     }
     const storyUrl = `${baseUrl}?token=${accessToken}`;
 
