@@ -119,7 +119,7 @@ app.post('/api/webhook', async (req, res) => {
   if (event.type === 'payment_intent.succeeded') {
     const { email } = event.data.object.metadata;
     const baseUrl = process.env.STORY_ACCESS_URL || 'https://naked.chefmyklove.com/story';
-    const fromEmail = process.env.FROM_EMAIL || 'hello@chefmyklove.com';
+    const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
 
     // Generate a unique access token and store it in Supabase
     const accessToken = crypto.randomUUID();
