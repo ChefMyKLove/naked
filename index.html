@@ -535,6 +535,85 @@ h1 em {
   color: var(--dust);
 }
 
+/* ── SUBSCRIBE ── */
+.subscribe-section {
+  padding: 100px 40px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(196,168,130,0.05) 0%, transparent 100%);
+  border-top: 1px solid rgba(196,168,130,0.15);
+}
+.subscribe-inner { max-width: 540px; margin: 0 auto; }
+.subscribe-eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 16px;
+}
+.subscribe-heading {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 400;
+  color: var(--cream);
+  margin: 0 0 14px;
+}
+.subscribe-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 36px;
+}
+.subscribe-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.subscribe-input {
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(196,168,130,0.3);
+  border-radius: 3px;
+  color: var(--cream);
+  font-size: 14px;
+  font-family: var(--serif);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.subscribe-input::placeholder { color: rgba(196,168,130,0.4); }
+.subscribe-input:focus { border-color: var(--gold); }
+.subscribe-btn {
+  padding: 14px 28px;
+  background: var(--gold);
+  color: #1a1209;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.subscribe-btn:hover { opacity: 0.85; }
+.subscribe-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.subscribe-msg {
+  margin-top: 14px;
+  font-size: 13px;
+  min-height: 20px;
+  color: var(--gold);
+}
+.subscribe-msg.error { color: #e07070; }
+@media (max-width: 600px) {
+  .subscribe-section { padding: 70px 24px; }
+  .subscribe-row { flex-direction: column; align-items: center; }
+  .subscribe-input { max-width: 100%; }
+}
+
 /* ── FOOTER ── */
 footer {
   border-top: 1px solid rgba(196,168,130,0.1);
@@ -1596,6 +1675,22 @@ footer {
   </div>
 </div>
 
+<!-- ── SUBSCRIBE ── -->
+<section class="subscribe-section">
+  <div class="subscribe-inner reveal">
+    <p class="subscribe-eyebrow">Stay Connected</p>
+    <h2 class="subscribe-heading">Be the first to know.</h2>
+    <p class="subscribe-sub">New releases, limited editions, and news from ChefMyKLove — delivered to your inbox.</p>
+    <form class="subscribe-form" id="subscribe-form" novalidate>
+      <div class="subscribe-row">
+        <input class="subscribe-input" id="subscribe-email" type="email" placeholder="your@email.com" autocomplete="email" required />
+        <button class="subscribe-btn" type="submit">Subscribe</button>
+      </div>
+      <p class="subscribe-msg" id="subscribe-msg" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
@@ -1967,6 +2062,47 @@ submitBtn.addEventListener('click', async () => {
     submitBtn.textContent = `Donate $${amount} & Read`;
   }
 });
+
+// ── Subscribe form ──
+(function() {
+  const form  = document.getElementById('subscribe-form');
+  const input = document.getElementById('subscribe-email');
+  const msg   = document.getElementById('subscribe-msg');
+  const btn   = form ? form.querySelector('.subscribe-btn') : null;
+  if (!form) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = input.value.trim();
+    if (!email) return;
+
+    msg.textContent = '';
+    msg.className = 'subscribe-msg';
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        msg.textContent = data.already ? 'You\'re already on the list!' : 'You\'re in! We\'ll be in touch.';
+        input.value = '';
+        btn.textContent = 'Subscribed';
+      } else {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+    } catch (err) {
+      msg.className = 'subscribe-msg error';
+      msg.textContent = err.message;
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }
+  });
+})();
 </script>
 </body>
 </html>

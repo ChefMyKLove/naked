@@ -175,5 +175,58 @@ app.post('/api/webhook', async (req, res) => {
   res.json({ received: true });
 });
 
+// ── Mailing list subscribe ────────────────────────────────
+app.post('/api/subscribe', async (req, res) => {
+  const { email } = req.body;
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    return res.status(503).json({ error: 'Service not configured.' });
+  }
+
+  try {
+    const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/subscribers`, {
+      method: 'POST',
+      headers: { ...supabaseHeaders(), 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email, source: 'website' })
+    });
+
+    if (insertRes.status === 409) {
+      return res.json({ already: true });
+    }
+    if (!insertRes.ok) {
+      throw new Error(`Supabase error: ${await insertRes.text()}`);
+    }
+
+    const fromEmail = process.env.FROM_EMAIL || 'hello@chefmyklove.com';
+    if (resend) {
+      await resend.emails.send({
+        from: fromEmail,
+        to: email,
+        subject: "You're on the list — ChefMyKLove",
+        html: `
+          <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#2a1f14;padding:40px 24px;">
+            <p style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#8a7a6a;">ChefMyKLove</p>
+            <h1 style="font-size:26px;font-weight:400;margin:16px 0 8px;">You're in.</h1>
+            <p style="color:#5a4a3a;line-height:1.7;">
+              Thank you for subscribing. You'll be among the first to hear about new releases,
+              limited editions, and everything happening in the world of ChefMyKLove.
+            </p>
+            <p style="margin-top:48px;font-size:13px;color:#8a7a6a;border-top:1px solid #e8dcc8;padding-top:24px;">
+              — ChefMyKLove
+            </p>
+          </div>
+        `
+      }).catch(err => console.error('Subscribe welcome email error:', err.message));
+    }
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('Subscribe error:', err.message);
+    res.status(500).json({ error: 'Something went wrong — please try again.' });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
