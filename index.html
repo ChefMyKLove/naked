@@ -746,6 +746,17 @@ footer {
 
 .online-header {
   margin-bottom: 40px;
+  cursor: pointer;
+  padding: 20px 24px;
+  border: 1px solid rgba(196,168,130,0.1);
+  border-radius: 2px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.online-header:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(196,168,130,0.15);
+  border-color: rgba(196,168,130,0.35);
+  background: rgba(196,168,130,0.07);
 }
 
 .online-title {
@@ -778,6 +789,20 @@ footer {
   display: flex;
   gap: 2px;
   margin-bottom: 48px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 2px;
+}
+.split-display:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(196,168,130,0.15);
+}
+.split-display:hover .split-half {
+  border-color: rgba(196,168,130,0.35);
+  background: rgba(196,168,130,0.07);
+}
+.split-display:hover .split-pct {
+  color: rgba(184,150,90,0.75);
 }
 
 .split-half {
@@ -785,6 +810,7 @@ footer {
   padding: 24px 28px;
   background: rgba(196,168,130,0.03);
   border: 1px solid rgba(196,168,130,0.1);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .split-pct {
@@ -1322,6 +1348,52 @@ footer {
   </div>
 </section>
 
+<!-- ── ONLINE EDITION ── -->
+<section id="online" class="section online-section">
+  <div class="section-label">Special Online Edition</div>
+
+  <div class="online-pride-bar reveal">
+    <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
+      <img class="pride-logo-img" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
+    </a>
+    <p class="pride-text"><strong>50% of every donation</strong> goes directly to <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'">Nanaimo Pride Society</a></p>
+  </div>
+
+  <div class="online-header reveal" role="button" tabindex="0" aria-label="Donate and read — opens donation form" onclick="document.getElementById('open-donation-modal').click()" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('open-donation-modal').click()">
+    <h2 class="online-title">The Full Story — Read It in Your Browser.</h2>
+    <p class="online-price">Pay what you want &nbsp;·&nbsp; $5 minimum donation &nbsp;·&nbsp; Instant access link</p>
+  </div>
+
+  <div class="online-description reveal">
+    <p>The interactive HTML edition of <em>We're Naked!</em> — built for the big screen. The full story is readable on any device, but the dream-sequence animation and interactive elements are designed to be experienced on a desktop or laptop, where they live at their best.</p>
+    <p>No subscription. No account. Donate $5 or more and receive a private access link by email — just the story, in your browser, at your pace.</p>
+  </div>
+
+  <div class="split-display reveal" role="button" tabindex="0" aria-label="Donate and read — opens donation form" onclick="document.getElementById('open-donation-modal').click()" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('open-donation-modal').click()">
+    <div class="split-half">
+      <div class="split-pct">50%</div>
+      <div class="split-label">
+        <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;font-weight:400;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'"><strong>Nanaimo Pride Society</strong></a>
+        supporting 2SLGBTQ+ community on the island
+      </div>
+      <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
+        <img class="split-pride-logo" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
+      </a>
+    </div>
+    <div class="split-half">
+      <div class="split-pct">50%</div>
+      <div class="split-label">
+        <strong>ChefMyKLove</strong>
+        the author, making more weird beautiful things
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-row reveal">
+    <button class="btn-primary" id="open-donation-modal">Donate &amp; Read — from $5</button>
+  </div>
+</section>
+
 <!-- ── STANDARD EDITION ── -->
 <section id="standard" class="section standard-section">
   <div class="section-label">Standard Edition</div>
@@ -1440,52 +1512,6 @@ footer {
       <button class="quote-dot" data-index="4" aria-label="Quote 5"></button>
       <button class="quote-dot" data-index="5" aria-label="Quote 6"></button>
     </div>
-  </div>
-</section>
-
-<!-- ── ONLINE EDITION ── -->
-<section id="online" class="section online-section">
-  <div class="section-label">Special Online Edition</div>
-
-  <div class="online-pride-bar reveal">
-    <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
-      <img class="pride-logo-img" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
-    </a>
-    <p class="pride-text"><strong>50% of every donation</strong> goes directly to <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'">Nanaimo Pride Society</a></p>
-  </div>
-
-  <div class="online-header reveal">
-    <h2 class="online-title">The Full Story — Read It in Your Browser.</h2>
-    <p class="online-price">Pay what you want &nbsp;·&nbsp; $5 minimum donation &nbsp;·&nbsp; Instant access link</p>
-  </div>
-
-  <div class="online-description reveal">
-    <p>The interactive HTML edition of <em>We're Naked!</em> — built for the big screen. The full story is readable on any device, but the dream-sequence animation and interactive elements are designed to be experienced on a desktop or laptop, where they live at their best.</p>
-    <p>No subscription. No account. Donate $5 or more and receive a private access link by email — just the story, in your browser, at your pace.</p>
-  </div>
-
-  <div class="split-display reveal">
-    <div class="split-half">
-      <div class="split-pct">50%</div>
-      <div class="split-label">
-        <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener" style="color:var(--cream);text-decoration:none;font-weight:400;border-bottom:1px solid rgba(196,168,130,0.35);transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(196,168,130,0.35)'"><strong>Nanaimo Pride Society</strong></a>
-        supporting 2SLGBTQ+ community on the island
-      </div>
-      <a href="https://www.nanaimopride.ca/" target="_blank" rel="noopener">
-        <img class="split-pride-logo" src="Nanaimo%20Pride-01.png" alt="Nanaimo Pride Society">
-      </a>
-    </div>
-    <div class="split-half">
-      <div class="split-pct">50%</div>
-      <div class="split-label">
-        <strong>ChefMyKLove</strong>
-        the author, making more weird beautiful things
-      </div>
-    </div>
-  </div>
-
-  <div class="cta-row reveal">
-    <button class="btn-primary" id="open-donation-modal">Donate &amp; Read — from $5</button>
   </div>
 </section>
 
