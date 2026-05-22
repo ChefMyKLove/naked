@@ -2108,7 +2108,7 @@ submitBtn.addEventListener('click', async () => {
     btn.textContent = 'Subscribing…';
 
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch('https://naked-production.up.railway.app/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
