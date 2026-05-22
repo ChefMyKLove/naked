@@ -1676,10 +1676,15 @@ footer {
     </div>
 
     <label style="font-size:0.75em;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:12px;">Email for access link</label>
-    <div class="amount-custom-wrap" style="margin-bottom:20px;">
+    <div class="amount-custom-wrap" style="margin-bottom:16px;">
       <span class="amount-symbol" style="font-size:0.9em;">@</span>
       <input class="amount-input" id="donor-email" type="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address">
     </div>
+
+    <label style="display:flex;align-items:center;gap:10px;margin-bottom:24px;cursor:pointer;">
+      <input type="checkbox" id="donor-subscribe" style="width:14px;height:14px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;">
+      <span style="font-size:0.72em;letter-spacing:2px;text-transform:uppercase;color:var(--dim);line-height:1.4;">Add me to the ChefMyKLove mailing list</span>
+    </label>
 
     <div id="stripe-card-element"><!-- Stripe mounts here --></div>
 
@@ -2041,10 +2046,11 @@ submitBtn.addEventListener('click', async () => {
 
   try {
     // 1. Ask your server to create a PaymentIntent
+    const subscribe = document.getElementById('donor-subscribe').checked;
     const res = await fetch(PAYMENT_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: Math.round(amount * 100), email, currency: 'cad' })
+      body: JSON.stringify({ amount: Math.round(amount * 100), email, currency: 'cad', subscribe })
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Server error — please try again.');

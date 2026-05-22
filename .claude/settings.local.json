@@ -8,7 +8,8 @@
       "Bash(node --check server.js)",
       "Bash(node -e ' *)",
       "Bash(npm install *)",
-      "Bash(findstr /i /n \"advance\" index.html)"
+      "Bash(findstr /i /n \"advance\" index.html)",
+      "Bash(dir C:\\\\Users\\\\micha\\\\Desktop\\\\We're Naked Project *)"
     ]
   },
   "enableAllProjectMcpServers": true,
