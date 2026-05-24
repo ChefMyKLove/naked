@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Rapture Soundtrack — We&rsquo;re Naked!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  background: radial-gradient(ellipse at 40% 20%, #1e1007 0%, #080402 100%);
+  font-family: 'Cormorant Garamond', serif;
+  color: rgba(200,169,106,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 80px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%,
+    transparent 30%,
+    rgba(180,120,50,0.06) 60%,
+    rgba(200,140,60,0.14) 80%,
+    rgba(215,160,75,0.22) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+  padding: 72px 0 48px;
+  border-bottom: 0.5px solid rgba(200,169,106,0.12);
+  margin-bottom: 0;
+}
+
+.header-eyebrow {
+  font-size: 0.62em;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(200,169,106,0.45);
+  margin-bottom: 16px;
+}
+
+.header-title {
+  font-size: 2.4em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: rgba(235,205,145,0.92);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.header-sub {
+  font-style: italic;
+  font-size: 1.0em;
+  color: rgba(200,169,106,0.55);
+  letter-spacing: 1px;
+  margin-bottom: 36px;
+}
+
+.coming-soon-badge {
+  display: inline-block;
+  border: 1px solid rgba(200,169,106,0.35);
+  border-radius: 2px;
+  padding: 8px 24px;
+  font-size: 0.70em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(200,169,106,0.60);
+  margin-bottom: 12px;
+}
+
+.coming-soon-note {
+  font-style: italic;
+  font-size: 0.78em;
+  color: rgba(200,169,106,0.38);
+  letter-spacing: 0.5px;
+}
+
+/* ── Tracklist ── */
+.tracklist {
+  list-style: none;
+  padding: 0;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 16px;
+  padding: 22px 0;
+  border-bottom: 0.5px solid rgba(200,169,106,0.08);
+  align-items: start;
+  transition: background 0.15s;
+}
+
+.track:first-child {
+  border-top: 0.5px solid rgba(200,169,106,0.08);
+}
+
+.track.soon {
+  opacity: 0.38;
+}
+
+.track-num {
+  font-size: 0.62em;
+  letter-spacing: 1px;
+  color: rgba(200,169,106,0.35);
+  padding-top: 3px;
+  text-align: right;
+}
+
+.track-body {}
+
+.track-title {
+  font-style: italic;
+  font-size: 1.12em;
+  color: rgba(235,205,145,0.90);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.track-artist {
+  font-size: 0.65em;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(200,169,106,0.55);
+  margin-bottom: 10px;
+}
+
+.track-annotation {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-style: italic;
+  font-size: 0.90em;
+  line-height: 1.7;
+  color: rgba(200,169,106,0.65);
+  letter-spacing: 0.2px;
+}
+
+.track-soon-label {
+  font-size: 0.60em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,169,106,0.40);
+  margin-top: 6px;
+  font-style: normal;
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 0.5px solid rgba(200,169,106,0.10);
+}
+
+.footer-title {
+  font-style: italic;
+  font-size: 1.1em;
+  color: rgba(200,169,106,0.45);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.footer-back {
+  font-size: 0.65em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,169,106,0.35);
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(200,169,106,0.20);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-back:hover {
+  color: rgba(200,169,106,0.65);
+  border-color: rgba(200,169,106,0.45);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="header-eyebrow">We&rsquo;re Naked! &mdash; A Rapture in Three Acts</div>
+    <h1 class="header-title">A Rapture Soundtrack</h1>
+    <p class="header-sub">thirteen tracks for the end of the world</p>
+    <div class="coming-soon-badge">player coming soon</div>
+    <p class="coming-soon-note">check back later &mdash; a full multi-platform player is on its way</p>
+  </header>
+
+  <ol class="tracklist">
+
+    <li class="track">
+      <span class="track-num">1</span>
+      <div class="track-body">
+        <div class="track-title">The Story of Willy</div>
+        <div class="track-artist">King Missile</div>
+        <div class="track-annotation">The epigraph. Willy&rsquo;s last morning is the story&rsquo;s first breath &mdash; unhurried, absurd, tender. The whole rapture is already here.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">2</span>
+      <div class="track-body">
+        <div class="track-title">Good Morning Good Morning</div>
+        <div class="track-artist">The Beatles</div>
+        <div class="track-annotation">The waking. The record clicks on and morning floods the room &mdash; cannabis smoke, Beatles noise, the ordinary made sacred.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">3</span>
+      <div class="track-body">
+        <div class="track-title">Nuclear War</div>
+        <div class="track-artist">Yo La Tengo</div>
+        <div class="track-annotation">The weight beneath the morning. Drone and dread sitting quietly alongside the domesticity. The apocalypse was always already here.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">4</span>
+      <div class="track-body">
+        <div class="track-title">It&rsquo;s the End of the World as We Know It</div>
+        <div class="track-artist">R.E.M.</div>
+        <div class="track-annotation">And we feel fine. The party in Central Park &mdash; everyone bopping to whatever sound is found, forty-nine minutes to go.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">5</span>
+      <div class="track-body">
+        <div class="track-title">Avant Gardener</div>
+        <div class="track-artist">Courtney Barnett</div>
+        <div class="track-annotation">Anxious mundane. The body doing ordinary things while the mind reaches for something it can&rsquo;t name. Pre-dust restlessness.</div>
+      </div>
+    </li>
+
+    <li class="track soon">
+      <span class="track-num">6</span>
+      <div class="track-body">
+        <div class="track-title">Pastorale</div>
+        <div class="track-artist">Kathleen Yearwood</div>
+        <div class="track-annotation">The hinge. Haunting pastoral breath between Barnett&rsquo;s anxiety and Delt&rsquo;s dissolution. A track you lean toward.</div>
+        <div class="track-soon-label">original composition &mdash; coming soon</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">7</span>
+      <div class="track-body">
+        <div class="track-title">Some Sunsick Day</div>
+        <div class="track-artist">Morgan Delt</div>
+        <div class="track-annotation">Hazy dissolution. The dream being told slowly &mdash; swirling, strange, not quite frightening. Warm disorientation.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">8</span>
+      <div class="track-body">
+        <div class="track-title">Chemtrails</div>
+        <div class="track-artist">Beck</div>
+        <div class="track-annotation">Smoke trails over the park. The MC says two minutes. The sky is full of missiles and we are still dancing.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">9</span>
+      <div class="track-body">
+        <div class="track-title">1999</div>
+        <div class="track-artist">Prince</div>
+        <div class="track-annotation">We partied like it was. Because it was. Not a care in the world &mdash; that kind of care just stopped mattering.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">10</span>
+      <div class="track-body">
+        <div class="track-title">Amour Fou</div>
+        <div class="track-artist">Maria in the Shower</div>
+        <div class="track-annotation">The dust settles on your face, on your hair, on mine. Strange love in the swirl &mdash; the most beautiful effect.</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">11</span>
+      <div class="track-body">
+        <div class="track-title">Hide and Seek</div>
+        <div class="track-artist">Imogen Heap</div>
+        <div class="track-annotation">Naked and alone. The fan off, the dust settling into corners. Something so vast and somehow still SO Loving.</div>
+      </div>
+    </li>
+
+    <li class="track soon">
+      <span class="track-num">12</span>
+      <div class="track-body">
+        <div class="track-title">[ composition ]</div>
+        <div class="track-artist">coming soon</div>
+        <div class="track-annotation">A second original composition is on its way. Its place in the sequence is held.</div>
+        <div class="track-soon-label">original composition &mdash; coming soon</div>
+      </div>
+    </li>
+
+    <li class="track">
+      <span class="track-num">13</span>
+      <div class="track-body">
+        <div class="track-title">Fade Into You</div>
+        <div class="track-artist">Mazzy Star</div>
+        <div class="track-annotation">The last motes catching light. The dream you can&rsquo;t hold. The only one you ever wanted to tell it to.</div>
+      </div>
+    </li>
+
+  </ol>
+
+  <footer>
+    <p class="footer-title">We&rsquo;re Naked! &mdash; A Rapture in Three Acts</p>
+    <a class="footer-back" href="https://naked.chefmyklove.com">&#8592; back to the story</a>
+  </footer>
+
+</div>
+</body>
+</html>
