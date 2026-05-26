@@ -4935,6 +4935,8 @@ function curlNoise(x, y) {
     await ensure();
     caState = true;
     updateCABtn(true);
+    var _camm = document.getElementById('ca-mix-modal');
+    if (_camm) _camm.classList.add('open');
     const c = ac();
     caMG = c.createGain(); caMG.gain.value = sfxV(); caMG.connect(c.destination);
     caCtGain = {};
