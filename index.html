@@ -1224,7 +1224,8 @@ footer {
   background: rgba(196,168,130,0.025);
 }
 
-.explore-card.active { opacity: 1; }
+.explore-card { pointer-events: none; }
+.explore-card.active { opacity: 1; pointer-events: auto; }
 
 .explore-icon {
   font-family: 'Cormorant Garamond', serif;
@@ -1339,11 +1340,17 @@ footer {
         <cite class="reaction-attribution">Sonam Maki</cite>
       </blockquote>
 
+      <blockquote class="reaction-slide">
+        <p class="reaction-text">&hellip;absurdist yet so vulnerable and hopeful</p>
+        <cite class="reaction-attribution">Kyle Rainer</cite>
+      </blockquote>
+
     </div>
     <div class="reaction-dots" id="reaction-dots">
       <button class="reaction-dot active" data-index="0" aria-label="Response 1"></button>
       <button class="reaction-dot" data-index="1" aria-label="Response 2"></button>
       <button class="reaction-dot" data-index="2" aria-label="Response 3"></button>
+      <button class="reaction-dot" data-index="3" aria-label="Response 4"></button>
     </div>
   </div>
 </section>
@@ -1615,7 +1622,7 @@ footer {
         <span class="explore-icon">&#9654;</span>
         <h3 class="explore-title">The Soundtrack</h3>
         <p class="explore-desc">The playlist that scored the writing of We&rsquo;re Naked &mdash; curated for the mood of each act.</p>
-        <a class="pill gold" href="#" target="_blank" rel="noopener">Stream on Spotify &rarr;</a>
+        <a class="pill gold" href="https://naked.chefmyklove.com/soundtrack">Check Out the Soundtrack &rarr;</a>
       </div>
 
       <div class="explore-card">
